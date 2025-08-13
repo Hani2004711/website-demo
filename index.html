@@ -34,7 +34,11 @@
         </button>
     
         <!-- Drawer -->
-        
+        <div class="offcanvas offcanvas-end nav-drawer" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">القائمة</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
+          </div>
     
           <div class="offcanvas-body">
             <ul class="navbar-nav flex-grow-1 align-items-lg-center gap-1 nav-rtl" id="mainNavList">
@@ -63,12 +67,6 @@
         <span class="nav-ink d-none d-lg-block" aria-hidden="true"></span>
       </div>
     </nav>
-<div class="offcanvas offcanvas-end nav-drawer" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavLabel">القائمة</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
-          </div>
-
 
     <!-- Hero -->
     <section id="home" class="hero">
@@ -921,7 +919,7 @@
           <!-- Form -->
           <div class="col-md-6">
             <article class="card contact-card p-3 h-100">
-              <form onsubmit="alert('يمكن ربط الإرسال بـ Formspree / Backend لاحقًا');return false;">
+              <form id="contactForm" onsubmit="alert('يمكن ربط الإرسال بـ Formspree / Backend لاحقًا');return false;">
                 <!-- الاسم -->
                 <div class="mb-3 input-wrap">
                   <label class="form-label">الاسم</label>
@@ -1025,12 +1023,9 @@
         </a>
       </div>
     </footer>
+    <script src="./assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="./assets/js/main.js" defer></script>
 
-  
-  <!-- Bootstrap JS (bundle with Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <!-- Main JS -->
-  <script src="./assets/js/main.js" defer></script>
-</body>
-
+  </body>
 </html>
