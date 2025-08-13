@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1200">
+  <title>هاني – موقع شخصي احترافي</title>
+  <meta name="description" content="سيرة ذاتية تفاعلية لهاني حسن قايد البخيتي: مطوّر Flutter وواجهات الويب وقواعد البيانات.">
+
+  <!-- Fonts / Libs -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+  <!-- ستايلك الخارجي -->
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <img src="./assets/img/hani.jpg" alt="">
+
+
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80" tabindex="0">
+    <!-- Navbar -->
+    <nav id="mainNav" class="navbar navbar-expand-lg glass-nav sticky-top">
+      <!-- شريط تقدّم التمرير -->
+      <div id="scrollProgress" aria-hidden="true"></div>
+    
+      <div class="container position-relative">
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#home" aria-label="الانتقال إلى الرئيسية">
+          <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
+          <span>سيرة <span class="brand-accent">هاني</span></span>
+        </a>
+    
+        <!-- Toggler -->
+        <button class="navbar-toggler nav-toggle btn-ghost" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav"
+                aria-controls="offcanvasNav" aria-label="فتح القائمة">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+    
+        <!-- Drawer -->
+        <div class="offcanvas offcanvas-end nav-drawer" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">القائمة</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
+          </div>
+    
+          <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1 align-items-lg-center gap-1 nav-rtl" id="mainNavList">
+              <li class="nav-item"><a class="nav-link" href="#home"><i class="fa-solid fa-house ms-1"></i><span>الرئيسية</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#content"><i class="fa-solid fa-user-graduate ms-1"></i><span>المؤهلات</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#content3"><i class="fa-solid fa-certificate ms-1"></i><span>الدورات</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#content2"><i class="fa-solid fa-briefcase ms-1"></i><span>الخبرة</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#content4"><i class="fa-solid fa-microchip ms-1"></i><span>المهارات</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#content6"><i class="fa-solid fa-diagram-project ms-1"></i><span>المشاريع</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#services"><i class="fa-solid fa-wand-magic-sparkles ms-1"></i><span>الخدمات</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fa-solid fa-comment-dots ms-1"></i><span>آراء</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i><span>تواصل</span></a></li>
+            </ul>
+    
+            <div class="d-flex gap-2 mt-3 mt-lg-0">
+              <a class="btn btn-brand" href="#" onclick="alert('أضف CV.pdf وضع رابطه هنا');return false;">
+                <i class="fa-solid fa-download ms-1"></i>تحميل السيرة
+              </a>
+            </div>
+          </div>
+    
+          <div class="drawer-edge"></div>
+        </div>
+    
+        <!-- الحبر المتحرك أسفل الرابط (سطح المكتب فقط) -->
+        <span class="nav-ink d-none d-lg-block" aria-hidden="true"></span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="row align-items-center g-4" data-aos="fade-up">
+          <!-- Avatar -->
+          <div class="col-md-auto">
+            <div class="avatar-shell">
+              <div class="avatar aura">
+                <img src="project\assets\img\h2.jpg" alt="صورة هاني حسن قايد البخيتي" loading="lazy">
+              </div>
+              <div class="avatar-ring" aria-hidden="true"></div>
+            </div>
+          </div>
+    
+          <!-- Text -->
+          <div class="col text-md-start text-center">
+            <h1 class="display-5 fw-extrabold hero-title">
+              هاني حسن قايد البخيتي
+            </h1>
+    
+            <p class="hero-subtitle mb-2">
+              <span id="typeTarget" class="type"></span>
+            </p>
+    
+            <!-- Chips -->
+            <ul class="hero-chips list-unstyled d-flex flex-wrap gap-2 mb-3 justify-content-center justify-content-md-start">
+              <li><span class="chip chip-white"><i class="fa-solid fa-location-dot"></i> صنعاء – اليمن (الثورة)</span></li>
+              <li><a class="chip chip-white" href="mailto:hani20047@gmail.com"><i class="fa-solid fa-envelope"></i> hani20047@gmail.com</a></li>
+              <li><a class="chip chip-white" href="tel:+967777704977"><i class="fa-solid fa-phone"></i> 777704977</a></li>
+              <li><span class="chip"><i class="fa-solid fa-cake-candles"></i> 2001/06/12</span></li>
+            </ul>
+    
+            <!-- CTA -->
+            <div class="hero-cta d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
+              <a class="btn btn-brand" href="#content6"><i class="fa-solid fa-rocket ms-1"></i> أعمالي</a>
+              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i> تواصل معي</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Tech Stats -->
+    <section id="stats" class="stats-section py-4">
+      <div class="container" data-aos="zoom-in">
+        <div class="row g-3 metrics">
+          <!-- Stat -->
+          <div class="col-6 col-md-4">
+            <div class="card stat stat--ultra p-3" aria-label="مشاريع موثّقة">
+              <div class="stat-icon">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
+              <div class="num" data-count="6">0</div>
+              <div class="lbl">مشاريع موثّقة</div>
+              <span class="stat-glow" aria-hidden="true"></span>
+              <span class="stat-spark" aria-hidden="true"></span>
+            </div>
+          </div>
+    
+          <!-- Stat -->
+          <div class="col-6 col-md-4">
+            <div class="card stat stat--ultra p-3" aria-label="دورات وشهادات">
+              <div class="stat-icon">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <div class="num" data-count="8">0</div>
+              <div class="lbl">دورات وشهادات</div>
+              <span class="stat-glow" aria-hidden="true"></span>
+              <span class="stat-spark" aria-hidden="true"></span>
+            </div>
+          </div>
+    
+          <!-- Stat -->
+          <div class="col-12 col-md-4">
+            <div class="card stat stat--ultra p-3" aria-label="مهارات رئيسية">
+              <div class="stat-icon">
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+              <div class="num" data-count="8">0</div>
+              <div class="lbl">مهارات رئيسية</div>
+              <span class="stat-glow" aria-hidden="true"></span>
+              <span class="stat-spark" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Qualifications -->
+    <section id="content" class="py-5 quals">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-user-graduate ms-2"></i>المؤهلات
+        </h2>
+    
+        <div class="row g-4">
+          <!-- مؤهل -->
+          <div class="col-md-6">
+            <article class="qual-card p-4 h-100">
+              <div class="qual-icon-wrap">
+                <div class="qual-icon-glow"></div>
+                <span class="qual-icon"><i class="fa-solid fa-laptop-code"></i></span>
+              </div>
+              <h5 class="qual-title mt-3">بكالوريوس تقنية معلومات</h5>
+              <p class="qual-sub">جامعة العلوم والتكنولوجيا – تقدير ممتاز.</p>
+              <span class="qual-light"></span>
+            </article>
+          </div>
+    
+          <!-- مؤهل -->
+          <div class="col-md-6">
+            <article class="qual-card p-4 h-100">
+              <div class="qual-icon-wrap">
+                <div class="qual-icon-glow"></div>
+                <span class="qual-icon"><i class="fa-solid fa-language"></i></span>
+              </div>
+              <h5 class="qual-title mt-3">دبلوم لغة إنجليزية</h5>
+              <p class="qual-sub">Excel ETA – تقدير ممتاز.</p>
+              <span class="qual-light"></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+  <!-- Certifications -->
+  <section id="content3" class="py-5 certs">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-certificate ms-2"></i>الدورات والشهادات
+        </h2>
+    
+        <div class="row g-3">
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <h6 class="cert-title">Intro to Diploma – Red Nexus</h6>
+              </header>
+              <p class="cert-desc">دبلومة (أمن معلومات/Red Teaming) – 120+ ساعة تدريبية.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-flag"></i></span>
+                <h6 class="cert-title">CTF & Hack The Box</h6>
+              </header>
+              <p class="cert-desc">تأهيل عملي على CTF ومختبرات Hack The Box (مستويات أساسية–متوسطة).</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-id-card"></i></span>
+                <h6 class="cert-title">ICDL</h6>
+              </header>
+              <p class="cert-desc">شهادة ICDL الدولية.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                <h6 class="cert-title">المهارات الأكاديمية المتميزة</h6>
+              </header>
+              <p class="cert-desc">دورة المهارات الأكاديمية المتميزة.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-comments"></i></span>
+                <h6 class="cert-title">مهارات التواصل</h6>
+              </header>
+              <p class="cert-desc">دورة مهارات التواصل.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-users-gear"></i></span>
+                <h6 class="cert-title">تنمية مهارات القيادة</h6>
+              </header>
+              <p class="cert-desc">دورة تنمية مهارات القيادة.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-brain"></i></span>
+                <h6 class="cert-title">التفكير الناقد</h6>
+              </header>
+              <p class="cert-desc">دورة التفكير الناقد.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-network-wired"></i></span>
+                <h6 class="cert-title">CCNA</h6>
+              </header>
+              <p class="cert-desc">شبكات سيسكو (CCNA).</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-brands fa-linux"></i></span>
+                <h6 class="cert-title">مقدمة في لينكس – Cisco</h6>
+              </header>
+              <p class="cert-desc">مقدمة في لينكس – Cisco.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <!-- بطاقة -->
+          <div class="col-md-6">
+            <article class="cert-card card p-3 h-100">
+              <header class="cert-head">
+                <span class="cert-icon"><i class="fa-solid fa-trophy"></i></span>
+                <h6 class="cert-title">شهادتا تقدير</h6>
+              </header>
+              <p class="cert-desc">Excel ETA &amp; امتياز.</p>
+              <span class="cert-edge" aria-hidden="true"></span>
+              <span class="cert-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Experience Timeline -->
+    <section id="content2" class="py-5 experience">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-briefcase ms-2"></i>الخبرة والمشاريع (خط زمني)
+        </h2>
+    
+        <div class="card p-4">
+          <div class="t-grid">
+            <div class="t-line" aria-hidden="true"></div>
+    
+            <!-- 1 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-shield-halved"></i></span>
+                <h5 class="mb-1">اختبار اختراق الويب وواجهات الـ API</h5>
+              </div>
+              <p class="mb-0 text-white">تطبيق عملي على OWASP Top 10، تحليل الطلبات/الاستجابات، واستغلال ثغرات شائعة وتوثيقها.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 2 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-user-ninja"></i></span>
+                <h5 class="mb-1">Red Teaming &amp; OSINT</h5>
+              </div>
+              <p class="mb-0 text-white">جمع معلومات مفتوحة المصدر، إعداد OPSEC، ومحاكاة خطوات الخصم ضمن سيناريوهات مقيّدة أخلاقيًا.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 3 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                <h5 class="mb-1">اختبار تطبيقات الموبايل</h5>
+              </div>
+              <p class="mb-0 text-white">فهم سلاسل الثقة، اعتراض الترافيك، وتحليل الـ APK والتخاطب الخلفي بأدوات مناسبة.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 4 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-toolbox"></i></span>
+                <h5 class="mb-1">أدوات واختراقات عملية</h5>
+              </div>
+              <p class="mb-0 text-white">Kali Linux، Nmap، Burp Suite، Metasploit، Wireshark، OWASP ZAP؛ إعداد بيئات اختبار آمنة.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 5 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-bug"></i></span>
+                <h5 class="mb-1">تقارير الثغرات وBug Bounty</h5>
+              </div>
+              <p class="mb-0 text-white">صياغة تقارير احترافية (PoC/Impact/Remediation) وجهوزية للمشاركة في برامج المكافآت.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 6 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-lock"></i></span>
+                <h5 class="mb-1">أساسيات التشفير والبرمجيات الخبيثة</h5>
+              </div>
+              <p class="mb-0 text-white">مفاهيم التعمية، آليات عمل البرمجيات الخبيثة، ومبادئ الوقاية والتحليل المبدئي.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 7 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-gauge-high"></i></span>
+                <h5 class="mb-1">اختبارات الضغط (DoS) – بيئات معملية</h5>
+              </div>
+              <p class="mb-0 text-white">محاكاة هجمات حِمل ضمن مختبرات خاصة مع مراعاة القوانين والأخلاقيات.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 8 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-people-group"></i></span>
+                <h5 class="mb-1">قيادة فرق عمل</h5>
+              </div>
+              <p class="mb-0 text-white">قيادة فرق في مشاريع جامعية والعمل بروح الفريق.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 9 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-fire"></i></span>
+                <h5 class="mb-1">Flutter + Firebase</h5>
+              </div>
+              <p class="mb-0 text-white">تطوير تطبيقات جوال وربطها بقاعدة بيانات سحابية.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 10 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-database"></i></span>
+                <h5 class="mb-1">مشروع التخرج – VIMS</h5>
+              </div>
+              <p class="mb-0 text-white">نظام إدارة السكان بخصائص عدّ وتتبع وتحليل.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 11 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-clipboard-list"></i></span>
+                <h5 class="mb-1">تطبيق عدّ سكاني للأحياء</h5>
+              </div>
+              <p class="mb-0 text-white">حل ميداني لجمع البيانات السكنية.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+            <!-- 12 -->
+            <article class="t-card">
+              <div class="t-head">
+                <span class="t-ico"><i class="fa-solid fa-pen-ruler"></i></span>
+                <h5 class="mb-1">تصميمات عبر Figma</h5>
+              </div>
+              <p class="mb-0 text-white">Depts / تطبيق طبي / موقع شخصي.</p>
+              <span class="t-sheen" aria-hidden="true"></span>
+            </article>
+    
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Skills -->
+    <section id="content4" class="py-5 skills">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-microchip ms-2"></i>المهارات التقنية
+        </h2>
+    
+        <div class="row g-4">
+          <!-- أمن المعلومات -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-shield-halved"></i></span>
+                  <h6 class="mb-0">أمن المعلومات وRed Teaming</h6>
+                </div>
+                <span class="pct-chip">65%</span>
+              </header>
+              <div class="skill-bar"><span class="fill striped" style="--w:65%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Flutter -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                  <h6 class="mb-0">Flutter (تطبيقات جوال)</h6>
+                </div>
+                <span class="pct-chip">90%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:90%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Front-End -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-code"></i></span>
+                  <h6 class="mb-0">واجهات ويب (Front-End)</h6>
+                </div>
+                <span class="pct-chip">75%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:75%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Back-End -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-server"></i></span>
+                  <h6 class="mb-0">Back-End أساسي</h6>
+                </div>
+                <span class="pct-chip">65%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:65%"></span></div>
+            </article>
+          </div>
+    
+          <!-- DSA -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-diagram-project"></i></span>
+                  <h6 class="mb-0">هياكل البيانات والخوارزميات</h6>
+                </div>
+                <span class="pct-chip">80%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Databases -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-database"></i></span>
+                  <h6 class="mb-0">قواعد بيانات (MySQL / Firebase)</h6>
+                </div>
+                <span class="pct-chip">85%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:85%"></span></div>
+            </article>
+          </div>
+    
+          <!-- APIs & State -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-solid fa-plug"></i></span>
+                  <h6 class="mb-0">APIs وإدارة الحالة (GetX/Provider)</h6>
+                </div>
+                <span class="pct-chip">78%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:78%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Figma -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-brands fa-figma"></i></span>
+                  <h6 class="mb-0">تصميم عبر Figma</h6>
+                </div>
+                <span class="pct-chip">70%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:70%"></span></div>
+            </article>
+          </div>
+    
+          <!-- Git -->
+          <div class="col-md-6">
+            <article class="card skill-card p-3 h-100">
+              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="skill-ico"><i class="fa-brands fa-git-alt"></i></span>
+                  <h6 class="mb-0">Git &amp; GitHub</h6>
+                </div>
+                <span class="pct-chip">80%</span>
+              </header>
+              <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
+            </article>
+          </div>
+        </div>
+    
+        <!-- Cloud of badges (كما هي مع لمسة أنعم) -->
+        <div class="skill-cloud mt-3 d-flex flex-wrap gap-2">
+          <span class="badge badge-skill">Dart</span>
+          <span class="badge badge-skill">TypeScript</span>
+          <span class="badge badge-skill">REST</span>
+          <span class="badge badge-skill">JSON</span>
+          <span class="badge badge-skill">OAuth</span>
+          <span class="badge badge-skill">CI/CD</span>
+          <span class="badge badge-skill">Kali Linux</span>
+          <span class="badge badge-skill">Nmap</span>
+          <span class="badge badge-skill">Burp Suite</span>
+          <span class="badge badge-skill">Metasploit</span>
+          <span class="badge badge-skill">Wireshark</span>
+          <span class="badge badge-skill">OWASP ZAP</span>
+          <span class="badge badge-skill">OSINT</span>
+          <span class="badge badge-skill">CTF</span>
+        </div>
+    
+        <!-- يبقى كود السطر البرمجي كما هو -->
+        <div class="card code-slab p-3 mt-3">
+    <pre><code class="code">// Flutter: مثال استدعاء API
+    Future&lt;Response&gt; getUsers() async {
+      final res = await http.get(Uri.parse('https://api.example.com/users'));
+      if(res.statusCode==200){ return res; }
+      throw Exception('خطأ في الاتصال');
+    }</code></pre>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Projects with filter -->
+    <section id="content6" class="py-5 projects">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-diagram-project ms-2"></i>المشاريع
+        </h2>
+    
+        <!-- فلاتر -->
+        <ul class="nav nav-pills gap-2 mb-3">
+          <li class="nav-item"><button class="nav-link filter-pill active" data-filter="all">الكل</button></li>
+          <li class="nav-item"><button class="nav-link filter-pill" data-filter="app">تطبيقات</button></li>
+          <li class="nav-item"><button class="nav-link filter-pill" data-filter="web">ويب</button></li>
+          <li class="nav-item"><button class="nav-link filter-pill" data-filter="design">تصميم</button></li>
+        </ul>
+    
+        <!-- شبكة المشاريع -->
+        <div class="row g-3" id="projects">
+          <!-- كرت -->
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                <h6 class="proj-title">Amer Al-Khamisi / تطبيق</h6>
+              </header>
+              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/qhovmmNTct7NEpGbm4lpr4/App%2F%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge" aria-hidden="true"></span>
+              <span class="proj-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+    
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-database"></i></span>
+                <h6 class="proj-title">Amer Al-Khamisi / ويب</h6>
+              </header>
+              <p class="proj-sub">نظام متكامل لإدارة بيانات السكان.</p>
+              <div class="proj-tags"><span class="tag">Web</span><span class="tag">Dashboard</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/biEEFYTtSzWXkv2P5U5o8g/%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge"></span><span class="proj-sheen"></span>
+            </article>
+          </div>
+    
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="design">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-cart-shopping"></i></span>
+                <h6 class="proj-title">Tknohiah</h6>
+              </header>
+              <p class="proj-sub">واجهات متجر إلكتروني بواجهة جذابة.</p>
+              <div class="proj-tags"><span class="tag">Figma</span><span class="tag">UI/UX</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/iFH58KRYopwEo76t4fJD9A/Tknohiah?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge"></span><span class="proj-sheen"></span>
+            </article>
+          </div>
+    
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
+                <h6 class="proj-title">HNTL / تطبيق</h6>
+              </header>
+              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/VQlTAhldY0iEXMhZtlYdl4/HNTL%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge"></span><span class="proj-sheen"></span>
+            </article>
+          </div>
+    
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
+                <h6 class="proj-title">فلذة كبدي / تطبيق</h6>
+              </header>
+              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/6SqhsIz3b8vME9NCzYElcB/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge"></span><span class="proj-sheen"></span>
+            </article>
+          </div>
+    
+          <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
+            <article class="card pro-card h-100 p-3 tilt">
+              <header class="proj-head">
+                <span class="proj-ico"><i class="fa-solid fa-globe"></i></span>
+                <h6 class="proj-title">فلذة كبدي / ويب</h6>
+              </header>
+              <p class="proj-sub">لوحات تحكم ويب للمشروع.</p>
+              <div class="proj-tags"><span class="tag">Web</span><span class="tag">Admin</span></div>
+              <a class="proj-cta stretched-link" href="https://www.figma.com/file/VGnKOqT1iQlLju5qCYEubK/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=1-450&mode=design" target="_blank" rel="noopener">
+                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <span class="proj-edge"></span><span class="proj-sheen"></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    
+    <!-- Services -->
+    <!-- Services -->
+  <section id="services" class="py-5 services">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-wand-magic-sparkles ms-2"></i>الخدمات
+        </h2>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-3">
+            <article class="card svc-card p-3 h-100 tilt">
+              <span class="svc-ico mb-2"><i class="fa-solid fa-shield-halved"></i></span>
+              <h6 class="mb-1">اختبار اختراق مبدئي</h6>
+              <p class="text-white mb-0">فحص أساسي لتطبيقات الويب/API ورفع تقرير ملاحظات وتحسينات.</p>
+              <span class="svc-edge" aria-hidden="true"></span>
+              <span class="svc-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="card svc-card p-3 h-100 tilt">
+              <span class="svc-ico mb-2"><i class="fa-solid fa-mobile-screen-button"></i></span>
+              <h6 class="mb-1">تطوير تطبيقات Flutter</h6>
+              <p class="text-white mb-0">بناء تطبيقات عالية الأداء لأنظمة Android و iOS.</p>
+              <span class="svc-edge"></span><span class="svc-sheen"></span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="card svc-card p-3 h-100 tilt">
+              <span class="svc-ico mb-2"><i class="fa-solid fa-window-restore"></i></span>
+              <h6 class="mb-1">واجهات ويب حديثة</h6>
+              <p class="text-white mb-0">تصميم Front-End احترافي سريع الاستجابة.</p>
+              <span class="svc-edge"></span><span class="svc-sheen"></span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="card svc-card p-3 h-100 tilt">
+              <span class="svc-ico mb-2"><i class="fa-solid fa-database"></i></span>
+              <h6 class="mb-1">قواعد بيانات</h6>
+              <p class="text-white mb-0">تصميم مخططات MySQL ودمج Firebase.</p>
+              <span class="svc-edge"></span><span class="svc-sheen"></span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="card svc-card p-3 h-100 tilt">
+              <span class="svc-ico mb-2"><i class="fa-solid fa-palette"></i></span>
+              <h6 class="mb-1">تصميم UI/UX</h6>
+              <p class="text-white mb-0">نماذج أولية عالية الدقة عبر Figma.</p>
+              <span class="svc-edge"></span><span class="svc-sheen"></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5 testimonials">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-comment-dots ms-2"></i>آراء العملاء
+        </h2>
+    
+        <div id="testiCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5200" data-bs-touch="true">
+          <!-- مؤشرات -->
+          <div class="carousel-indicators custom-indicators">
+            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="0" class="active" aria-label="1"></button>
+            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="1" aria-label="2"></button>
+            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="2" aria-label="3"></button>
+          </div>
+    
+          <div class="carousel-inner">
+    
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <article class="card testi-card p-4">
+                <span class="testi-progress" aria-hidden="true"></span>
+                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="testi-avatar"><i class="fa-solid fa-user"></i></span>
+                    <div class="testi-meta">
+                      <strong class="testi-name">عميل متجر إلكتروني</strong>
+                      <small class="testi-role">تجارة إلكترونية</small>
+                    </div>
+                  </div>
+                  <div class="testi-stars" aria-label="5 من 5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+    
+                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+                <p class="mb-1">“واجهات أنيقة وتسليم في الوقت. تجربة رائعة.”</p>
+                <span class="testi-edge"></span>
+                <span class="testi-sheen" aria-hidden="true"></span>
+              </article>
+            </div>
+    
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <article class="card testi-card p-4">
+                <span class="testi-progress" aria-hidden="true"></span>
+                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="testi-avatar"><i class="fa-solid fa-users"></i></span>
+                    <div class="testi-meta">
+                      <strong class="testi-name">فريق مشروع جامعي</strong>
+                      <small class="testi-role">تطبيق Flutter</small>
+                    </div>
+                  </div>
+                  <div class="testi-stars" aria-label="5 من 5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+    
+                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+                <p class="mb-1">“تطبيق Flutter سريع ومستقر كما طُلب بالضبط.”</p>
+                <span class="testi-edge"></span>
+                <span class="testi-sheen" aria-hidden="true"></span>
+              </article>
+            </div>
+    
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <article class="card testi-card p-4">
+                <span class="testi-progress" aria-hidden="true"></span>
+                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="testi-avatar"><i class="fa-solid fa-stethoscope"></i></span>
+                    <div class="testi-meta">
+                      <strong class="testi-name">عميل تطبيق طبي</strong>
+                      <small class="testi-role">واجهات ويب</small>
+                    </div>
+                  </div>
+                  <div class="testi-stars" aria-label="5 من 5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+    
+                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+                <p class="mb-1">“احترافية في التعامل ومرونة في التعديلات.”</p>
+                <span class="testi-edge"></span>
+                <span class="testi-sheen" aria-hidden="true"></span>
+              </article>
+            </div>
+    
+          </div>
+    
+          <button class="carousel-control-prev" type="button" data-bs-target="#testiCarousel" data-bs-slide="prev" aria-label="السابق">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testiCarousel" data-bs-slide="next" aria-label="التالي">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    
+  <!-- Contact -->
+  <section id="contact" class="py-5 contact">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title h3 mb-4">
+          <i class="fa-solid fa-paper-plane ms-2"></i>تواصل معي
+        </h2>
+    
+        <div class="row g-3">
+          <!-- Form -->
+          <div class="col-md-6">
+            <article class="card contact-card p-3 h-100">
+              <form onsubmit="alert('يمكن ربط الإرسال بـ Formspree / Backend لاحقًا');return false;">
+                <!-- الاسم -->
+                <div class="mb-3 input-wrap">
+                  <label class="form-label">الاسم</label>
+                  <i class="fi fa-solid fa-user"></i>
+                  <input type="text" class="form-control" required>
+                </div>
+                <!-- البريد -->
+                <div class="mb-3 input-wrap">
+                  <label class="form-label">البريد الإلكتروني</label>
+                  <i class="fi fa-solid fa-at"></i>
+                  <input type="email" class="form-control" required>
+                </div>
+                <!-- الرسالة -->
+                <div class="mb-3 input-wrap">
+                  <label class="form-label">رسالتك</label>
+                  <i class="fi fa-solid fa-message"></i>
+                  <textarea class="form-control" rows="4" required></textarea>
+                </div>
+    
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                  <button class="btn btn-brand" type="submit">
+                    <i class="fa-solid fa-paper-plane ms-1"></i>إرسال
+                  </button>
+                  <a class="btn btn-ghost" href="https://wa.me/967777704977" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-whatsapp ms-1"></i>واتساب
+                  </a>
+                  <small class="form-note text-white-50">أردّ عادة خلال 24 ساعة.</small>
+                </div>
+    
+                <span class="contact-edge" aria-hidden="true"></span>
+                <span class="contact-sheen" aria-hidden="true"></span>
+              </form>
+            </article>
+          </div>
+    
+          <!-- Info -->
+          <div class="col-md-6">
+            <article class="card contact-card p-3 h-100">
+              <h6 class="mb-3 fw-bold">معلومات التواصل</h6>
+    
+              <div class="contact-item">
+                <span class="contact-ico"><i class="fa-solid fa-location-dot"></i></span>
+                <div>
+                  <div class="lbl">العنوان</div>
+                  <div class="val text-white">صنعاء – اليمن (الثورة)</div>
+                </div>
+              </div>
+    
+              <div class="contact-item">
+                <span class="contact-ico"><i class="fa-solid fa-envelope"></i></span>
+                <div>
+                  <div class="lbl">البريد</div>
+                  <a class="val link" href="mailto:hani20047@gmail.com">hani20047@gmail.com</a>
+                </div>
+              </div>
+    
+              <div class="contact-item">
+                <span class="contact-ico"><i class="fa-solid fa-phone"></i></span>
+                <div>
+                  <div class="lbl">الهاتف</div>
+                  <a class="val link" href="tel:+967777704977">+967 777704977</a>
+                </div>
+              </div>
+    
+              <div class="mt-3">
+                <div class="lbl mb-2">الشبكات</div>
+                <div class="d-flex social gap-2 flex-wrap">
+                  <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/zz996" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://wh.ms/967777704977" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                  <a href="https://www.snapchat.com/add/jabs_m21?share_id=9CNKKf1hR6CZXpJDzEBtJQ&locale=ar_YE" target="_blank" aria-label="Snapchat"><i class="fa-brands fa-snapchat-ghost"></i></a>
+                </div>
+              </div>
+    
+              <span class="contact-edge" aria-hidden="true"></span>
+              <span class="contact-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  <!-- Footer -->
+  <footer class="site-footer py-4 mt-4">
+      <span class="footer-edge" aria-hidden="true"></span>
+    
+      <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+        <!-- Brand mini -->
+        <div class="d-flex align-items-center gap-2">
+          <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
+          <strong class="brand-text">سيرة <span class="brand-accent">هاني</span></strong>
+        </div>
+    
+        <!-- Copy -->
+        <p class="mb-0 text-white-50 small">© <span id="y"></span> هاني حسن. جميع الحقوق محفوظة.</p>
+    
+        <!-- To top -->
+        <a href="#home" class="btn btn-ghost to-top">
+          <i class="fa-solid fa-arrow-up ms-1"></i> للأعلى
+          <span class="toTop-sheen" aria-hidden="true"></span>
+        </a>
+      </div>
+    </footer>
+    <script src="./assets/js/main.js" defer></script>
+
+  </body>
+</html>
