@@ -1642,3 +1642,14 @@ transition:transform .65s cubic-bezier(.22,.61,.36,1), opacity .3s ease;
 .site-footer .to-top, .toTop-sheen{ transition:none!important; animation:none!important }
 }
 
+
+
+/* ===== Mobile tweaks (added) ===== */
+@media (max-width: 575.98px){
+  body{ line-height:1.75 }
+  .container{ padding-inline:12px }
+  .hero{ padding:56px 0 28px }
+  .chip{ font-size:.9rem; padding:.4rem .6rem }
+  .navbar .container{ padding-inline:12px }
+  .site-footer .container{ text-align:center }
+}
