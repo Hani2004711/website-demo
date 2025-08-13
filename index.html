@@ -2,1030 +2,3611 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هاني – موقع شخصي احترافي</title>
-  <meta name="description" content="سيرة ذاتية تفاعلية لهاني حسن قايد البخيتي: مطوّر Flutter وواجهات الويب وقواعد البيانات.">
-
-  <!-- Fonts / Libs -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobile Page — Matte Tech Pro+</title>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0b0f16" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet" />
+  <!-- Bootstrap RTL + Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-  <!-- ستايلك الخارجي -->
-  <link rel="stylesheet" href="./assets/css/main.css"></head>
-<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80" tabindex="0">
-    <!-- Navbar -->
-    <nav id="mainNav" class="navbar navbar-expand-lg glass-nav sticky-top">
-      <!-- شريط تقدّم التمرير -->
-      <div id="scrollProgress" aria-hidden="true"></div>
-    
-      <div class="container position-relative">
-        <!-- Brand -->
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#home" aria-label="الانتقال إلى الرئيسية">
-          <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
-          <span>سيرة <span class="brand-accent">هاني</span></span>
+  <style>
+  /* =================== Matte Tech — Pro+ Palette & Micro-Interactions =================== */
+  :root{
+    /* خلفية داكنة غير لامعة */
+    --bg:#0b0f16; --bg-2:#0f1524; --paper:#101725;
+
+    /* طبقات النص */
+    --t-1:#eaf2ff;      /* نص أساسي */
+    --t-2:#b7c6e6;      /* ثانوي */
+    --t-3:#8498bf;      /* خافت */
+    --muted:var(--t-3);
+
+    /* ألوان الهوية (منسقة للأيقونات والنصوص) */
+    --brand:#22d3ee;    /* تركواز */
+    --brand-2:#4f46e5;  /* أرجواني كحلي */
+    --accent:#38bdf8;   /* أزرق سماوي */
+
+    /* تدرجات مخصّصة */
+    --grad-main:linear-gradient(90deg,var(--brand),var(--brand-2));
+    --grad-accent:linear-gradient(90deg,var(--brand),var(--accent));
+    --icon-grad:linear-gradient(90deg,#9ae6ff,#b9b5ff);
+
+    /* حواف/ظلال */
+    --border:#1a2438; --ring:#ffffff22;
+    --radius:16px; --radius-lg:24px;
+    --shadow:0 14px 36px rgba(0,0,0,.45);
+
+    /* نظام مقاسات */
+    --gx: clamp(14px, 2.4vw, 28px);
+    --container: min(100% - calc(var(--gx)*2), 1160px);
+    --fs-body: clamp(14px, 3.4vw, 18px);
+    --fs-nav: clamp(13px, 2.8vw, 16px);
+    --fs-kicker: clamp(12px, 2.6vw, 14px);
+    --fs-hero: clamp(16px, 3.2vw, 18px);
+    --pad-1: clamp(10px, 2.2vw, 14px);
+    --pad-2: clamp(14px, 3vw, 18px);
+    --pad-3: clamp(18px, 3.6vw, 24px);
+
+    /* شبكة خلفية */
+    --grid-c: color-mix(in oklab, var(--t-1), transparent 94%);
+  }
+
+  /* أساسيات */
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+  body{
+    margin:0; font:400 var(--fs-body)/1.75 "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    color:var(--t-1);
+    background:
+      radial-gradient(900px 520px at 120% -10%, #4f46e528 0%, transparent 60%),
+      radial-gradient(800px 520px at -20% 0%, #22d3ee24 0%, transparent 60%),
+      linear-gradient(to right, var(--grid-c) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-c) 1px, transparent 1px),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-size:auto,auto,26px 26px,26px 26px,auto;
+    overflow-x:hidden;
+    text-wrap:balance;
+  }
+  .container{width:var(--container); margin-inline:auto}
+  img,video{max-width:100%; height:auto; display:block}
+  a{color:inherit; text-decoration:none}
+  ::selection{background:color-mix(in oklab,var(--brand),black 30%); color:#fff}
+
+  /* =================== App Bar (مُنظَّم) =================== */
+  .appbar{
+    position:sticky; top:0; z-index:30;
+    background:linear-gradient(180deg, #0b0f16f2, #0b0f1600);
+    backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-wrap{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+    min-height: clamp(56px, 7.5vw, 72px);
+    gap: var(--pad-1); position:relative; padding-block: 6px;
+  }
+
+  /* الشعار */
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .brand-title{letter-spacing:.2px; color:var(--t-1)}
+  .brand-accent{background:var(--grad-main); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .brand-badge{
+    inline-size: clamp(34px, 5vw, 40px); block-size: clamp(34px, 5vw, 40px);
+    border-radius:12px; display:grid; place-items:center; color:#0b121d;
+    background:linear-gradient(135deg,#9ae6ff,#c7d2fe);
+    box-shadow:inset 0 1px 0 #ffffffaa, 0 6px 18px rgba(34,211,238,.25);
+    transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .brand:hover .brand-badge{transform:translateY(-1px); box-shadow:inset 0 1px 0 #ffffffaa, 0 10px 24px rgba(79,70,229,.28)}
+
+  /* روابط سطح المكتب */
+  .main-links{display:none}
+  @media (min-width:992px){
+    .main-links{
+      display:flex !important; justify-content:center; align-items:center;
+      gap: 6px; margin:0; padding:0; list-style:none;
+    }
+    .main-links .nav-item{flex:0 0 auto}
+    .main-links .nav-link{
+      font-size: var(--fs-nav);
+      color:var(--t-2);
+      padding:.56rem .85rem; border-radius:999px;
+      transition: background .18s ease, color .18s ease, transform .08s ease, box-shadow .18s ease;
+      line-height:1;
+    }
+    .main-links .nav-link:hover{color:var(--t-1); background:#0f172a66}
+    .main-links .nav-link:active{transform:translateY(1px)}
+    .main-links .nav-link.active{
+      color:#0a0f16; background:var(--icon-grad);
+      box-shadow:0 10px 18px rgba(79,70,229,.22);
+      font-weight:700;
+    }
+  }
+
+  /* أيقونات — ألوان وخامة احترافية */
+  .nav-drawer .nav-link i{ 
+    font-size:1.05em; 
+    background:var(--icon-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+    opacity:.95; transition:transform .12s ease, opacity .12s ease;
+  }
+  .nav-drawer .nav-link:hover i{ transform:translateY(-1px); opacity:1 }
+  .main-links .nav-link i{
+    background:var(--icon-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* أزرار */
+  .actions{display:flex; align-items:center; gap:8px}
+  .nav-toggle{
+    display:grid; place-items:center; width:44px; height:44px;
+    border:1px solid var(--border); border-radius:12px; background:#0e1524cc; color:var(--t-1);
+    transition:box-shadow .15s ease, transform .08s ease;
+  }
+  .nav-toggle:focus-visible{outline:2px solid color-mix(in oklab,var(--brand),white 25%); outline-offset:2px}
+  .nav-toggle:hover{ box-shadow:0 0 0 2px color-mix(in oklab,var(--brand),transparent 70%) inset }
+  .nav-toggle:active{ transform:translateY(1px) }
+  .nav-toggle .fa-xmark{display:none}
+  .nav-toggle.is-open .fa-bars{display:none}
+  .nav-toggle.is-open .fa-xmark{display:inline-block}
+
+  .btn-brand{
+    display:none; background:var(--grad-accent); color:#06121a; font-weight:800;
+    border:0; border-radius:12px; padding:.6rem .95rem;
+    box-shadow:0 10px 20px rgba(56,189,248,.22), inset 0 1px 0 #ffffff88;
+    transition:filter .15s ease, transform .08s ease, box-shadow .18s ease;
+  }
+  @media (min-width:992px){ .btn-brand{display:inline-flex; align-items:center; gap:.4rem} }
+  .btn-brand:hover{filter:brightness(.98); box-shadow:0 14px 28px rgba(56,189,248,.28), inset 0 1px 0 #ffffffaa}
+  .btn-brand:active{transform:translateY(1px)}
+
+  /* شريط التقدّم */
+  #scrollProgress{
+    position:absolute; left:0; right:0; bottom:-1px; height:2px;
+    background:var(--grad-main);
+    transform:scaleX(0); transform-origin:left; transition:transform .2s linear;
+  }
+
+  /* =================== Hero =================== */
+  .hero{ padding-block: var(--pad-2) }
+  .surface{
+    background:linear-gradient(180deg,#111a2e, #0b101c);
+    border:1px solid var(--border); border-radius:var(--radius-lg);
+    padding: var(--pad-2);
+    box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .surface::before{
+    content:""; position:absolute; inset:-28% -12% auto auto; aspect-ratio:1/1; width:min(60vmin,520px);
+    background:
+      radial-gradient(closest-side, #22d3ee2f 0, transparent 70%),
+      conic-gradient(from 210deg at 50% 50%, #4f46e51f 0 60%, transparent 60%);
+    filter:blur(18px);
+  }
+  .kicker{
+    display:inline-flex; align-items:center; gap:.5rem; font-weight:800; font-size:var(--fs-kicker);
+    color:#a9d2ff; background:#0f172a; border:1px solid #1a2742;
+    border-radius:999px; padding:.38rem .78rem; margin-bottom:.8rem;
+    box-shadow:0 8px 18px rgba(15,23,42,.35);
+  }
+  .hero p{ font-size: var(--fs-hero); color:var(--t-2) }
+
+  /* =================== Offcanvas (قائمة الجوال) =================== */
+  .offcanvas{background:var(--paper); color:var(--t-1)}
+  .offcanvas-header{border-bottom:1px solid var(--border)}
+  .nav-drawer .nav-link{
+    display:flex; align-items:center; gap:.45rem; color:var(--t-2);
+    padding:.62rem .8rem; border-radius:12px; font-size: var(--fs-nav);
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-drawer .nav-link:hover{background:#0f1a2d; color:var(--t-1)}
+  .nav-drawer .nav-link.active{
+    background:linear-gradient(90deg,#0e1a32,#0c172a); color:var(--t-1); font-weight:700;
+  }
+  .drawer-edge{position:absolute; inset:0; pointer-events:none; border-radius:inherit; box-shadow:inset 0 0 0 1px var(--border)}
+
+  /* نصوص عامة */
+  .text-muted{color:var(--t-2)!important}
+  p,li{color:var(--t-2)}
+
+  /* وصولية + تفضيلات */
+  :focus-visible{outline:2px solid color-mix(in oklab,var(--brand),white 22%); outline-offset:2px; border-radius:10px}
+  @media (prefers-reduced-motion: reduce){
+    *{transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important}
+  }
+
+  /* أصغر الشاشات */
+  @media (max-width:360px){
+    .nav-toggle{width:42px; height:42px}
+  }
+
+  /* Scrollbar */
+  *::-webkit-scrollbar{height:10px; width:10px}
+  *::-webkit-scrollbar-thumb{background:color-mix(in oklab, var(--t-1), transparent 82%); border-radius:999px}
+  *::-webkit-scrollbar-track{background:transparent}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========== Luxe Hero Styles (يندمج مع ثيمك الداكن) ========== */
+.hero-luxe{
+  --ink:   var(--t-1, var(--ink, #eaf2ff));
+  --muted: var(--t-2, var(--muted, #b7c6e6));
+  --paper: var(--paper, #101725);
+  --brand: var(--brand, #22d3ee);
+  --brand2:var(--brand-2, #4f46e5);
+  --border:var(--border, #1a2438);
+
+  --fs-title: clamp(26px, 6.5vw, 42px);
+  --fs-sub:   clamp(15px, 3.4vw, 18px);
+  --pad:      clamp(16px, 4vw, 28px);
+
+  padding-block: clamp(18px, 5vw, 46px);
+  color: var(--ink);
+}
+
+.hero-luxe .hero-card{
+  position:relative; overflow:hidden;
+  background: linear-gradient(180deg, #0f1628, #0b101c);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: var(--pad);
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  isolation:isolate;
+}
+
+/* شبكة خلفية رقيقة داخل البطاقة */
+.hero-luxe .grid{
+  position:absolute; inset:0; z-index:-1; opacity:.28;
+  background:
+    linear-gradient(to right, color-mix(in oklab, var(--ink), transparent 94%) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink), transparent 94%) 1px, transparent 1px);
+  background-size: 26px 26px, 26px 26px;
+}
+
+/* حافة متدرّجة (Gradient Edge) */
+.hero-luxe .edge{
+  position:absolute; inset:1px; border-radius:calc(20px - 1px); pointer-events:none;
+  box-shadow:inset 0 0 0 1px color-mix(in oklab, var(--ink), transparent 88%);
+}
+.hero-luxe .spot{
+  position:absolute; inset:auto -15% -25% auto; width:min(60vmin,520px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand), transparent 70%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand2), transparent 70%) 0, transparent 60%);
+  filter: blur(24px); opacity:.8;
+}
+
+/* العنوان */
+.hero-luxe .hero-title{
+  margin:0 0 .25rem;
+  font-size: var(--fs-title);
+  letter-spacing:.2px;
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 14%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow: 0 0 0 #0000; /* يمنع تمويه غير مرغوب */
+}
+
+/* سطر التعريف المتغيّر */
+.hero-luxe .hero-subtitle{ color:var(--muted); font-size: var(--fs-sub) }
+.type{
+  position:relative; display:inline-block; min-width: 7ch;
+}
+.type::after{
+  content:""; display:inline-block; width:2px; height:1.05em; margin-inline-start:6px;
+  background: color-mix(in oklab, var(--ink), transparent 10%);
+  animation: blink .9s steps(1,end) infinite; vertical-align:-2px;
+}
+@keyframes blink{ 50%{ opacity:0 } }
+
+/* الصورة: إطار فخم + حلقة متدرجة + وميض */
+.avatar-stack{ display:inline-block; position:relative }
+.avatar{
+  position:relative;
+  inline-size: clamp(140px, 28vw, 200px);
+  block-size: clamp(140px, 28vw, 200px);
+  border-radius:50%; overflow:hidden; background:#0f1525;
+  border:1px solid color-mix(in oklab, var(--ink), transparent 86%);
+  box-shadow: 0 18px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.avatar img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(1.02) contrast(1.02) }
+.avatar .ring{
+  position:absolute; inset:-8px; border-radius:50%;
+  background: conic-gradient(from 0deg, var(--brand), var(--brand2), var(--brand));
+  filter: blur(7px); opacity:.55; animation: spin 16s linear infinite;
+}
+.avatar .shine{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: radial-gradient(28% 28% at 70% 20%, #ffffff14, transparent 60%);
+  mix-blend-mode:screen; opacity:.6;
+}
+@keyframes spin{ to{ transform:rotate(360deg) } }
+
+/* الشرائح (Chips) */
+.hero-chips .chip{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.46rem .8rem; border-radius:999px; line-height:1;
+  font-size: clamp(12px, 2.7vw, 14px);
+  transition: transform .08s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  border:1px solid color-mix(in oklab, var(--ink), transparent 85%);
+}
+.chip i{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip:text; background-clip:text; color:transparent; opacity:.95;
+}
+.chip-glass{
+  color:var(--ink);
+  background: color-mix(in oklab, var(--paper), transparent 16%);
+  backdrop-filter: blur(6px);
+}
+.chip-solid{
+  color:#06121d;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  border-color: transparent;
+}
+.hero-chips a.chip:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.25) }
+
+/* الأزرار */
+.btn-luxe{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  color:#06121d; font-weight:800; border:0;
+  border-radius:12px; padding:.68rem 1rem;
+  box-shadow: 0 12px 28px color-mix(in oklab, var(--brand), transparent 64%), inset 0 1px 0 #ffffff88;
+  transition: filter .15s ease, transform .08s ease, box-shadow .18s ease;
+}
+.btn-luxe:hover{ filter:brightness(.98); box-shadow: 0 16px 32px color-mix(in oklab, var(--brand), transparent 54%), inset 0 1px 0 #ffffffaa }
+.btn-luxe:active{ transform: translateY(1px) }
+
+.btn-ghost-luxe{
+  background: color-mix(in oklab, var(--paper), transparent 10%);
+  color: var(--ink); border:1px solid color-mix(in oklab, var(--ink), transparent 85%);
+  border-radius:12px; padding:.66rem 1rem; font-weight:700;
+  transition: background .15s ease, transform .08s ease, box-shadow .18s ease;
+}
+.btn-ghost-luxe:hover{ background: color-mix(in oklab, var(--paper), transparent 6%) }
+.btn-ghost-luxe:active{ transform: translateY(1px) }
+
+/* تحريك دخول لطيف (بديل AOS) */
+[data-animate]{ opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease }
+[data-animate].in{ opacity:1; transform:none }
+
+/* تحسين الهواتف الصغيرة */
+@media (max-width: 767.98px){
+  .hero-luxe .avatar{ margin-bottom:.25rem }
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important }
+}
+/* ======================= نصوص وألوان احترافية (Utilities) ======================= */
+/* لا تغيّر أي شيء عندك؛ كلها فئات اختيارية جاهزة للاستعمال. */
+
+/* لوحة ألوان للنص */
+.text-ink     { color: var(--ink) !important; }
+.text-muted   { color: var(--muted) !important; }
+.text-soft    { color: color-mix(in oklab, var(--ink), transparent 40%) !important; }
+
+.text-brand   { color: var(--brand) !important; }
+.text-brand2  { color: var(--brand2) !important; }
+
+/* تدرّج نصي أنيق (يلتقط ألوان العلامة) */
+.text-gradient{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent !important;
+}
+.text-gradient-ink{
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 18%));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent !important;
+}
+
+/* توهّج خفيف للنص */
+.glow-text{
+  text-shadow:
+    0 0 18px color-mix(in oklab, var(--brand),  transparent 78%),
+    0 0 36px color-mix(in oklab, var(--brand2), transparent 86%);
+}
+
+/* خط سفلي متدرّج (بديل للـ underline التقليدي) */
+.underline-gradient{
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--brand), var(--brand2));
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  padding-bottom: 2px;
+}
+.underline-gradient:hover{
+  background-size: 100% 3px;
+}
+
+/* عناوين بفخامة بسيطة */
+.heading-1{
+  font-size: clamp(24px, 6.2vw, 40px);
+  letter-spacing: .2px;
+  margin: 0 0 .5rem;
+  line-height: 1.2;
+}
+.heading-2{
+  font-size: clamp(20px, 4.8vw, 28px);
+  letter-spacing: .15px;
+  margin: 0 0 .5rem;
+  line-height: 1.25;
+}
+
+/* شريط تمييز أسفل العنوان */
+.title-accent{
+  position: relative;
+}
+.title-accent::after{
+  content: "";
+  display: block;
+  height: 3px; border-radius: 2px;
+  width: min(120px, 42%);
+  margin-top: .45rem;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  opacity: .9;
+}
+
+/* فقرة تمهيدية (lead) */
+.lead{
+  font-size: clamp(15px, 3.6vw, 18px);
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* شارة تمييز للنص داخل السطر */
+.mark-glass{
+  display: inline-block;
+  padding: .18rem .45rem;
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--paper), transparent 14%);
+  border: 1px solid color-mix(in oklab, var(--ink), transparent 85%);
+  color: var(--ink);
+  backdrop-filter: blur(6px);
+}
+
+/* شارة تدرّج ممتلئة */
+.badge-gradient{
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .22rem .55rem;
+  border-radius: 999px;
+  font-weight: 700; line-height: 1;
+  color: #06121d;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  border: 0;
+  box-shadow: 0 8px 18px color-mix(in oklab, var(--brand), transparent 70%);
+}
+.badge-gradient i{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+/* روابط أنيقة (نيون خفيف) */
+.link-neon{
+  color: var(--ink); text-decoration: none; position: relative;
+  transition: color .15s ease;
+}
+.link-neon::after{
+  content: ""; position: absolute; inset: auto 0 -2px 0; height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  transform: scaleX(.5); transform-origin: right; transition: transform .2s ease, opacity .2s ease;
+  opacity: .7;
+}
+.link-neon:hover{ color: var(--ink); }
+.link-neon:hover::after{ transform: scaleX(1); transform-origin: left; opacity: 1; }
+
+/* أيقونات متدرجة (لـ Font Awesome) */
+.icon-gradient{
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent !important;
+}
+.icon-soft{ color: color-mix(in oklab, var(--ink), transparent 30%) !important; }
+
+/* قوائم بعلامة متدرجة */
+.ul-gradient{
+  list-style: none; padding: 0; margin: 0;
+}
+.ul-gradient li{
+  position: relative; padding-inline-start: 1.25rem; margin: .35rem 0;
+}
+.ul-gradient li::before{
+  content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .55em;
+  width: .6rem; height: .6rem; border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  box-shadow: 0 0 10px color-mix(in oklab, var(--brand), transparent 70%);
+}
+
+/* نص صغير/كبير وسطر/تباعد */
+.text-xs{ font-size: clamp(12px, 2.9vw, 13px) }
+.text-sm{ font-size: clamp(13px, 3.2vw, 14px) }
+.text-lg{ font-size: clamp(16px, 4.2vw, 20px) }
+.lh-tight{ line-height: 1.25 }
+.lh-relaxed{ line-height: 1.8 }
+.tracking-wide{ letter-spacing: .3px }
+
+/* تغليف اقتباس أنيق */
+.quote{
+  position: relative;
+  padding: .9rem 1rem .9rem 1.1rem;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--paper), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--ink), transparent 85%);
+  color: var(--ink);
+}
+.quote::before{
+  content: "“";
+  position: absolute; inset-inline-start: .55rem; inset-block-start: .2rem;
+  font-size: 1.8em; line-height: 1; opacity: .25;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+/* كيبورد (kbd) لطيف */
+.kbd{
+  display: inline-block; padding: .12rem .38rem; border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: .92em;
+  background: color-mix(in oklab, var(--paper), transparent 10%);
+  border: 1px solid color-mix(in oklab, var(--ink), transparent 82%);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* حالات تركيز للوصولية */
+:where(.link-neon, .chip, .btn-luxe, .btn-ghost-luxe, .badge-gradient):focus-visible{
+  outline: 2px solid color-mix(in oklab, var(--brand2), white 20%);
+  outline-offset: 2px;
+}
+
+/* دعم الشاشات الصغيرة */
+@media (max-width: 480px){
+  .heading-1{ font-size: clamp(22px, 7.2vw, 34px) }
+  .heading-2{ font-size: clamp(18px, 5.2vw, 24px) }
+}
+.chip-date{ color:#fff !important; }
+.chip-date i{ color:#fff !important; background:none !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+stats-section{
+  color: var(--ink, #eaf2ff);
+  --paper: var(--paper, #101725);
+  --border: var(--border, #1a2438);
+  --brand: var(--brand, #22d3ee);
+  --brand-2: var(--brand-2, #4f46e5);
+  --muted: var(--muted, #b7c6e6);
+  padding-block: clamp(12px, 4vw, 24px);
+}
+
+.metrics{ row-gap: 14px; }
+
+.stat{
+  position: relative;
+  border-radius: 18px;
+  background: linear-gradient(180deg,
+              color-mix(in oklab, var(--paper), transparent 0%),
+              color-mix(in oklab, var(--paper), transparent 10%));
+  border: 1px solid color-mix(in oklab, var(--border), white 6%);
+  box-shadow:
+    0 14px 36px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  overflow: hidden;
+  isolation: isolate;
+  backdrop-filter: saturate(140%) blur(6px);
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+/* شريط طاقة علوي */
+.stat::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  opacity:.9;
+}
+
+/* حد داخلي متدرّج رفيع */
+.stat::after{
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius:18px;
+  padding:1px;
+  background: linear-gradient(90deg,
+              color-mix(in oklab, var(--brand), white 10%),
+              color-mix(in oklab, var(--brand-2), white 10%));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  opacity:.22;
+}
+
+/* أيقونة */
+.stat-icon{
+  display: grid; place-items: center;
+  width: clamp(44px, 9vw, 56px); height: clamp(44px, 9vw, 56px);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--paper), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--border), white 8%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+  margin-bottom: .35rem;
+  transition: transform .18s ease;
+}
+.stat-icon i{
+  font-size: clamp(18px, 4.2vw, 22px);
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* الرقم */
+.stat .num{
+  font-weight: 900;
+  font-size: clamp(24px, 7.5vw, 48px);
+  line-height: 1;
+  margin-bottom: .15rem;
+  letter-spacing: .4px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(90deg,
+              color-mix(in oklab, var(--ink, #eaf2ff), black 0%),
+              color-mix(in oklab, var(--ink, #eaf2ff), black 14%));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 0 #0000;
+}
+
+/* التسمية */
+.stat .lbl{
+  font-size: clamp(12px, 3.2vw, 14px);
+  color: var(--muted);
+  letter-spacing: .2px;
+}
+
+/* توهج خلفي ناعم */
+.stat-glow{
+  position:absolute; inset:auto -18% -30% auto; width:min(58vmin, 460px); aspect-ratio:1/1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand), transparent 75%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand-2), transparent 78%) 0, transparent 60%);
+  filter: blur(22px); opacity:.7; z-index:-1;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* شرار خفيف */
+.stat-spark{
+  position:absolute; inset:0; pointer-events:none; opacity:.18;
+  background:
+    radial-gradient(3px 3px at 20% 30%, #fff 0 50%, transparent 51%),
+    radial-gradient(3px 3px at 75% 65%, #fff 0 50%, transparent 51%),
+    radial-gradient(3px 3px at 45% 15%, #fff 0 50%, transparent 51%);
+  mix-blend-mode: screen;
+  animation: spark 6s ease-in-out infinite alternate;
+}
+@keyframes spark{
+  0% { transform: translateY(0) }
+  100%{ transform: translateY(-8px) }
+}
+
+/* Hover/Focus */
+.stat:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.42);
+  border-color: color-mix(in oklab, var(--border), white 16%);
+}
+.stat:hover .stat-icon{ transform: translateY(-1px) }
+.stat:hover .stat-glow{ opacity:.9; transform: scale(1.02) }
+.stat:focus-within{ outline: 2px solid color-mix(in oklab, var(--brand), white 20%); outline-offset: 3px; border-radius: 20px }
+
+/* شبكة الهواتف الصغيرة */
+@media (max-width: 575.98px){
+  .metrics .col-12, .metrics .col-6, .metrics .col-md-4{ padding-inline: 6px }
+  .stat{ padding: .95rem !important }
+}
+
+/* احترام تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .stat, .stat-icon, .stat-glow, .stat-spark{ animation: none !important; transition: none !important }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.quals{
+  color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--brand), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--brand-2, #4f46e5), transparent 92%) 0, transparent 60%);
+  background-color: var(--paper-2);
+  /* هوامش مريحة على الهاتف مع دعم النوتش */
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* ===== عنوان القسم ===== */
+.quals .section-title{
+  display:flex; align-items:center; gap:.6rem;
+  margin:0 0 1.1rem;
+  font-weight:800; letter-spacing:.2px; position:relative;
+  line-height:1.2;
+}
+.quals .section-title i{
+  font-size:1em;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 18px color-mix(in oklab, var(--brand), transparent 70%));
+}
+.quals .section-title small{
+  font-weight:600; color:var(--ink-2);
+  margin-inline-start:.2rem; letter-spacing:.1px;
+  font-size:.9rem;
+}
+.quals .section-title::after{
+  content:""; position:absolute; inset:auto 0 -8px auto; height:3px;
+  width:min(160px, 50%); border-radius:3px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  opacity:.9;
+}
+
+/* ===== البطاقة ===== */
+.qual-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  border-radius: clamp(14px, 3.5vw, 20px);
+  padding: clamp(14px, 4vw, 20px) !important;
+  height:100%;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--brand), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--brand-2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--paper), transparent 0%), color-mix(in oklab, var(--paper), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--border), white 10%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:saturate(135%) blur(5px);
+  -webkit-backdrop-filter:saturate(135%) blur(5px);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  will-change: transform;
+}
+
+/* خط طاقة علوي */
+.qual-card::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px; opacity:.95;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+}
+
+/* حد داخلي متدرّج (mask) */
+.qual-card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  padding:1px; opacity:.2;
+  background:linear-gradient(90deg,
+    color-mix(in oklab, var(--brand), white 10%),
+    color-mix(in oklab, var(--brand-2), white 10%));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+}
+
+/* شبكة خفيفة (نقللها على الهاتف) */
+.qual-card .grid{
+  position:absolute; inset:0; z-index:-1; opacity:.14;
+  background:
+    linear-gradient(to right, color-mix(in oklab, var(--ink), transparent 94%) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink), transparent 94%) 1px, transparent 1px);
+  background-size: 22px 22px, 22px 22px;
+}
+
+/* لمعان */
+.qual-card .shine{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform:translateX(-120%); opacity:.55;
+  animation:shine-sweep 5s ease-in-out infinite;
+}
+@keyframes shine-sweep{
+  0%,8%{ transform:translateX(-120%) }
+  55%  { transform:translateX(120%) }
+  100% { transform:translateX(120%) }
+}
+
+/* الأيقونة */
+.qual-icon-wrap{ --size: clamp(54px, 16vw, 76px); position:relative; width:var(--size); height:var(--size) }
+.qual-icon{
+  position:relative; display:grid; place-items:center; width:100%; height:100%;
+  border-radius:16px;
+  background:color-mix(in oklab, var(--paper), transparent 12%);
+  border:1px solid color-mix(in oklab, var(--border), white 12%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .18s ease;
+}
+.qual-icon i{
+  font-size: clamp(20px, 6vw, 28px);
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 22px color-mix(in oklab, var(--brand), transparent 74%));
+}
+
+/* توهج ونبض */
+.qual-icon-glow{
+  position:absolute; inset:auto -28% -32% auto; width:160%; aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand), transparent 74%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand-2), transparent 78%) 0, transparent 60%);
+  filter:blur(22px); opacity:.75; transform:rotate(6deg);
+}
+.qual-icon-wrap .pulse{
+  content:""; position:absolute; inset:-6px; border-radius:20px; pointer-events:none;
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand), transparent 72%);
+  animation:pulse 2.4s ease-out infinite;
+}
+@keyframes pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--brand), transparent 72%) }
+  70%{  box-shadow:0 0 0 12px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+
+/* عنوان ونص */
+.qual-title{
+  margin:.7rem 0 .3rem;
+  font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.125rem); /* أصغر قليلاً على الهاتف */
+  background:linear-gradient(90deg,var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.qual-sub{
+  margin:0;
+  color:var(--ink-2);
+  text-wrap:balance;
+  font-size: clamp(.9rem, 3.6vw, 1rem);
+}
+
+/* صفّ الميتا (أختياري) */
+.qual-meta{
+  display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;
+  font-size:.9rem; color:var(--ink-2)
+}
+.qual-badge{
+  padding:.32rem .6rem; border-radius:999px; font-weight:700; font-size:.72rem; letter-spacing:.2px;
+  border:1px solid color-mix(in oklab, var(--border), white 14%);
+  background:color-mix(in oklab, var(--paper), transparent 10%);
+}
+
+/* إضاءات ناعمة */
+.qual-light{
+  position:absolute; inset:auto -25% -35% auto; width:min(62vmin,520px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand), transparent 80%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--brand-2), transparent 82%) 0, transparent 60%);
+  filter:blur(22px); opacity:.5;
+}
+
+/* Hover + Focus (نخففها للهاتف) */
+.qual-card:hover{ transform:translateY(-2px); border-color:color-mix(in oklab, var(--border), white 16%); box-shadow:0 16px 40px rgba(0,0,0,.40) }
+.qual-card:hover .qual-icon{ transform:translateY(-1px) }
+.qual-card:focus-visible{ outline:3px solid color-mix(in oklab, var(--brand), white 25%); outline-offset:2px }
+
+/* ظهور تدريجي */
+.reveal{ opacity:0; transform:translateY(10px) scale(.985) }
+.reveal.in{ opacity:1; transform:none; transition:opacity .5s ease, transform .5s ease }
+.reveal[data-delay="1"]{ transition-delay:.08s }
+.reveal[data-delay="2"]{ transition-delay:.16s }
+.reveal[data-delay="3"]{ transition-delay:.24s }
+
+/* ========== تحسينات خاصة بالهاتف ========== */
+@media (max-width: 767.98px){
+  /* أعمدة أوسع وتنفس أفضل */
+  .quals .row.g-4>[class*="col-"]{ padding-inline:10px }
+
+  /* بطاقات أخف على الـ GPU */
+  .qual-card{
+    padding: 14px !important;
+    box-shadow: 0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.05);
+    backdrop-filter:saturate(125%) blur(4px);
+    -webkit-backdrop-filter:saturate(125%) blur(4px);
+  }
+
+  /* نقلل شدة الشبكة واللمعان */
+  .qual-card .grid{ opacity:.1; background-size: 20px 20px, 20px 20px }
+  .qual-card .shine{ opacity:.45; animation-duration: 6s }
+
+  /* الشارات تتلفّف بسلاسة */
+  .qual-meta{ gap:.4rem; row-gap:.45rem }
+  .qual-badge{ font-size:.7rem; padding:.28rem .55rem }
+}
+
+/* شاشات أصغر جداً */
+@media (max-width: 360px){
+  .qual-title{ font-size: 1rem }
+  .qual-sub{ font-size: .9rem }
+  .qual-icon-wrap{ --size: 56px }
+}
+
+/* تقليل الحركة للمستخدمين الذين يفضّلون ذلك */
+@media (prefers-reduced-motion: reduce){
+  .qual-card, .qual-icon, .shine, .pulse, .reveal{ animation:none!important; transition:none!important }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============== Certifications – Pro (يستخدم متغيراتك الحالية) =============== */
+/* ملاحظة: لا نعرّف :root جديد. نستخدم متغيراتك: --t-1/--t-2/--brand/--brand-2/--paper/--bg-2/--border ... */
+/* =============== Certifications – Pro Mobile v2 (متوافق مع متغيراتك) =============== */
+/* يعتمد على متغيراتك الموجودة: --t-1/--t-2/--brand/--brand-2/--paper/--bg-2/--border/--radius/--shadow ... */
+
+.certs{
+  /* Aliases محلية لتسهيل القراءة */
+  --ink: var(--t-1);
+  --ink-2: var(--t-2);
+  --base: var(--paper);
+  --layer: var(--bg-2);
+  --bdr: var(--border);
+  --g1: var(--brand);
+  --g2: var(--brand-2);
+
+  color: var(--ink);
+  /* لمسات ضوء فوق خلفية صفحتك */
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--g1), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--g2), transparent 92%) 0, transparent 60%);
+  background-color: transparent;
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* ===== العنوان ===== */
+.certs .section-title{
+  display:flex; align-items:center; gap:.6rem;
+  margin:0 0 1.15rem;
+  font-weight:800; letter-spacing:.2px; position:relative; line-height:1.2;
+}
+.certs .section-title i{
+  font-size:1.05em;
+  background:var(--grad-main, linear-gradient(90deg,var(--g1),var(--g2)));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 18px color-mix(in oklab, var(--g1), transparent 70%));
+}
+.certs .section-title::after{
+  content:""; position:absolute; inset:auto 0 -10px auto; height:3px;
+  width:min(210px, 52%); border-radius:3px;
+  background:var(--grad-main, linear-gradient(90deg,var(--g1),var(--g2)));
+  opacity:.95;
+}
+
+/* ===== البطاقة ===== */
+.cert-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: clamp(14px, 3.5vw, var(--radius, 18px));
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32)), inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:saturate(130%) blur(5px);
+  -webkit-backdrop-filter:saturate(130%) blur(5px);
+  padding: clamp(14px, 3.8vw, 18px) !important;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  will-change: transform;
+}
+
+/* شريط علوي */
+.cert-card::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px; opacity:.95;
+  background:var(--grad-main, linear-gradient(90deg,var(--g1),var(--g2)));
+}
+
+/* حد داخلي متدرّج (mask) */
+.cert-card::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  padding:1px; opacity:.22;
+  background:linear-gradient(90deg,
+    color-mix(in oklab, var(--g1), white 10%),
+    color-mix(in oklab, var(--g2), white 10%));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+}
+
+/* رأس البطاقة */
+.cert-head{
+  display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem;
+}
+
+/* كبسولة الأيقونة + نبض */
+.cert-icon{
+  --size: clamp(42px, 12vw, 56px);
+  width:var(--size); height:var(--size); flex:0 0 var(--size);
+  display:grid; place-items:center; border-radius:14px;
+  background:color-mix(in oklab, var(--base), transparent 12%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  position:relative; overflow:hidden;
+}
+.cert-icon::after{
+  /* نبضة أثيرية */
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%);
+  animation:cert-pulse 2.6s ease-out infinite;
+}
+@keyframes cert-pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%) }
+  70%{  box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.cert-icon i{
+  font-size: clamp(18px, 6vw, 22px);
+  background:var(--icon-grad, linear-gradient(90deg,#9ae6ff,#b9b5ff));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 8px 22px color-mix(in oklab, var(--g1), transparent 74%));
+}
+
+/* عنوان ووصف */
+.cert-title{
+  margin:0; font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.06rem);
+  background:linear-gradient(90deg,var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.cert-desc{
+  margin:.2rem 0 0;
+  color:var(--ink-2);
+  font-size: clamp(.92rem, 3.6vw, .98rem);
+  text-wrap:balance;
+}
+
+/* إضاءات ناعمة + لمعة */
+.cert-edge{
+  position:absolute; inset:auto -26% -34% auto; width:min(58vmin,480px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter:blur(22px); opacity:.5;
+}
+.cert-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background:linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform:translateX(-120%); opacity:.48;
+  animation:cert-sheen 5.8s ease-in-out infinite;
+}
+@keyframes cert-sheen{
+  0%,8%{ transform:translateX(-120%) }
+  55%  { transform:translateX(120%) }
+  100% { transform:translateX(120%) }
+}
+
+/* Hover/Focus/Motion */
+.cert-card:hover{
+  transform: translateY(-3px);
+  border-color:color-mix(in oklab, var(--bdr), white 18%);
+  box-shadow: 0 18px 44px rgba(0,0,0,.44);
+}
+.cert-card:focus-within{
+  outline:3px solid color-mix(in oklab, var(--g1), white 25%); outline-offset:2px;
+}
+
+/* ===== تحسينات الهاتف ===== */
+@media (max-width: 767.98px){
+  .certs .row.g-3>[class*="col-"]{ padding-inline:10px }
+  .cert-card{ padding:14px !important; box-shadow:0 8px 22px rgba(0,0,0,.28) }
+  .cert-sheen{ opacity:.42; animation-duration:6.4s }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width:360px){
+  .cert-title{ font-size: 1rem }
+  .cert-desc{ font-size: .9rem }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .cert-card, .cert-sheen, .cert-icon::after{ animation:none !important; transition:none !important }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============== Experience Timeline – Pro Mobile v2 =============== */
+/* يستخدم متغيراتك: --t-1/--t-2/--brand/--brand-2/--accent/--paper/--bg-2/--border/--radius/--shadow */
+
+.experience{
+  --ink: var(--t-1);
+  --ink-2: var(--t-2);
+  --g1: var(--brand);
+  --g2: var(--brand-2);
+  --accent: var(--accent);
+  --bdr: var(--border);
+  --base: var(--paper);
+  --r: clamp(14px, 3.5vw, var(--radius, 18px));
+
+  color: var(--ink);
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--g2), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--g1), transparent 92%) 0, transparent 60%);
+  background-color: transparent;
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* عنوان القسم */
+.experience .section-title{
+  display:flex; align-items:center; gap:.6rem; margin:0 0 1.15rem;
+  font-weight:800; letter-spacing:.2px; position:relative; line-height:1.2;
+}
+.experience .section-title i{
+  font-size:1.05em;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 18px color-mix(in oklab, var(--g1), transparent 70%));
+}
+.experience .section-title::after{
+  content:""; position:absolute; inset:auto 0 -10px auto; height:3px;
+  width:min(240px, 52%); border-radius:3px;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  opacity:.95;
+}
+
+/* غلاف */
+.experience .card{
+  background: color-mix(in oklab, var(--base), transparent 4%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 10%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+}
+
+/* شبكة الخط الزمني */
+.t-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1fr;          /* هاتف: عمود واحد */
+  gap: clamp(14px, 3.6vw, 20px);
+  padding-inline: clamp(6px, 2vw, 8px);
+}
+
+/* خط زمني جانبي (يصبح مركزيًا على الشاشات الكبيرة) */
+.t-line{
+  position:absolute; inset:0 auto 0 auto;
+  width:2px; background:linear-gradient(180deg,
+    color-mix(in oklab, var(--g1), transparent 30%),
+    color-mix(in oklab, var(--g2), transparent 30%));
+  inset-inline-start: clamp(12px, 4vw, 18px);   /* يمين/بداية في RTL */
+  border-radius:2px; opacity:.75;
+}
+
+/* البطاقة */
+.t-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  padding: clamp(14px, 3.8vw, 18px) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: saturate(130%) blur(5px); -webkit-backdrop-filter: saturate(130%) blur(5px);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  will-change: transform;
+}
+
+/* نقطة على الخط + ذراع وصل */
+.t-card::before{
+  content:""; position:absolute; top: clamp(18px, 3.4vw, 22px);
+  width:12px; height:12px; border-radius:50%;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--g1), transparent 85%), 0 6px 16px rgba(0,0,0,.35);
+  inset-inline-start: calc(clamp(12px, 4vw, 18px) - 5px);
+  z-index:2;
+}
+.t-card::after{
+  content:""; position:absolute; top: clamp(24px, 3.9vw, 26px);
+  width: clamp(18px, 5vw, 28px); height:2px;
+  background: color-mix(in oklab, var(--bdr), white 15%);
+  inset-inline-start: clamp(24px, 6vw, 34px);
+  border-radius:2px; opacity:.85;
+}
+
+/* رأس البطاقة */
+.t-head{ display:flex; align-items:center; gap:.7rem; margin-bottom:.35rem }
+.t-ico{
+  --size: clamp(40px, 11vw, 52px);
+  width:var(--size); height:var(--size); flex:0 0 var(--size);
+  display:grid; place-items:center; border-radius:14px; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.t-ico::after{
+  /* نبضة خفيفة حول الأيقونة */
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%);
+  animation: t-pulse 2.6s ease-out infinite;
+}
+@keyframes t-pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%) }
+  70%{  box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.t-ico i{
+  font-size: clamp(18px, 6vw, 22px);
+  background: var(--icon-grad, linear-gradient(90deg,#9ae6ff,#b9b5ff));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 22px color-mix(in oklab, var(--g1), transparent 74%));
+}
+
+/* النص */
+.t-card h5{
+  margin:0; font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.06rem);
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.t-card p{
+  margin:.2rem 0 0; color: var(--ink-2);
+  font-size: clamp(.92rem, 3.6vw, .98rem);
+  text-wrap: balance;
+}
+
+/* لمعة رقيقة */
+.t-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: t-sheen 6s ease-in-out infinite;
+}
+@keyframes t-sheen{
+  0%,8%{ transform:translateX(-120%) }
+  55%  { transform:translateX(120%) }
+  100% { transform:translateX(120%) }
+}
+
+/* تفاعلات */
+.t-card:hover{
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--bdr), white 18%);
+  box-shadow: 0 18px 44px rgba(0,0,0,.44);
+}
+.t-card:focus-within{
+  outline: 3px solid color-mix(in oklab, var(--g1), white 25%); outline-offset: 2px;
+}
+
+/* ===== شاشات أوسع: عمودان متناوبان وخط مركزي ===== */
+@media (min-width: 992px){
+  .t-grid{ grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 22px) }
+  .t-line{
+    left: 50%; transform: translateX(-50%); width:2px;
+    inset-inline-start: auto;
+  }
+  .t-card::before{ inset-inline-start: calc(50% - 6px) }  /* النقطة فوق الخط */
+  .t-card::after{
+    inset-inline-start: calc(50% + 6px);
+    width: clamp(18px, 2.2vw, 26px);
+  }
+
+  /* توزيع متناوب RTL */
+  .t-card:nth-child(odd){  grid-column: 2 / 3; --_side: -1; }
+  .t-card:nth-child(even){ grid-column: 1 / 2; --_side:  1; }
+  .t-card:nth-child(odd)::after,
+  .t-card:nth-child(even)::after{
+    transform: translateX(calc(var(--_side) * 100%));
+  }
+}
+
+/* احترام تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .t-card, .t-sheen, .t-ico::after{ animation:none !important; transition:none !important }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =============== Skills – Pro Mobile (يندمج مع ألوانك الحالية) =============== */
+/* يعتمد على متغيراتك: --t-1/--t-2/--brand/--brand-2/--accent/--paper/--bg-2/--border/--radius/--shadow */
+
+.skills{
+  --ink: var(--t-1);
+  --ink-2: var(--t-2);
+  --g1: var(--brand);
+  --g2: var(--brand-2);
+  --acc: var(--accent);
+  --bdr: var(--border);
+  --base: var(--paper);
+  --r: clamp(14px, 3.5vw, var(--radius, 18px));
+
+  color: var(--ink);
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--g2), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--g1), transparent 92%) 0, transparent 60%);
+  background-color: transparent;
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* ===== عنوان القسم ===== */
+.skills .section-title{
+  display:flex; align-items:center; gap:.6rem; margin:0 0 1.15rem;
+  font-weight:800; letter-spacing:.2px; position:relative; line-height:1.2;
+}
+.skills .section-title i{
+  font-size:1.05em;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 18px color-mix(in oklab, var(--g1), transparent 70%));
+}
+.skills .section-title::after{
+  content:""; position:absolute; inset:auto 0 -10px auto; height:3px;
+  width:min(240px, 52%); border-radius:3px;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  opacity:.95;
+}
+
+/* ===== بطاقة مهارة ===== */
+.skill-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  backdrop-filter:saturate(130%) blur(5px);
+  -webkit-backdrop-filter:saturate(130%) blur(5px);
+  padding: clamp(14px, 3.8vw, 18px) !important;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  will-change: transform;
+}
+.skill-card:hover{
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--bdr), white 18%);
+  box-shadow: 0 18px 44px rgba(0,0,0,.44);
+}
+
+/* رأس البطاقة */
+.skill-head h6{
+  margin:0; font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.06rem);
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.skill-ico{
+  --size: clamp(40px, 11vw, 52px);
+  width:var(--size); height:var(--size);
+  display:grid; place-items:center;
+  border-radius:14px; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.skill-ico::after{
+  /* نبضة حول الأيقونة */
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%);
+  animation: s-pulse 2.6s ease-out infinite;
+}
+@keyframes s-pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%) }
+  70%{  box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.skill-ico i{
+  font-size: clamp(18px, 6vw, 22px);
+  background: var(--icon-grad, linear-gradient(90deg,#9ae6ff,#b9b5ff));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 22px color-mix(in oklab, var(--g1), transparent 74%));
+}
+
+/* شريحة النسبة */
+.pct-chip{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.35rem .6rem; border-radius:999px; font-weight:800;
+  font-size:.82rem; letter-spacing:.2px; line-height:1;
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%);
+  background: color-mix(in oklab, var(--base), transparent 10%);
+  color: var(--ink-2);
+}
+
+/* شريط المهارة */
+.skill-bar{
+  --h: 10px;
+  position:relative; width:100%; height:var(--h);
+  border-radius:999px; overflow:hidden;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--bdr), white 8%), transparent 80%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 10%);
+}
+.skill-bar .fill{
+  --w: 0%;
+  position:absolute; inset:0 auto 0 0; width:var(--w); height:100%;
+  background: linear-gradient(90deg, var(--g1), var(--g2));
+  border-radius:inherit;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--g1), white 25%) inset, 0 6px 14px rgba(0,0,0,.25);
+  transform: translateZ(0); /* GPU hint */
+}
+.skill-bar .fill.striped{
+  /* خطوط حركة */
+  --stripe: repeating-linear-gradient(45deg, #ffffff22 0 10px, transparent 10px 20px);
+  background: linear-gradient(90deg, var(--g1), var(--g2)), var(--stripe);
+  background-size: auto, 28px 28px;
+  animation: s-stripes 1.2s linear infinite;
+}
+@keyframes s-stripes{
+  to{ background-position: 0, 28px 0 }
+}
+
+/* سحابة الشارات */
+.badge-skill{
+  --bg: color-mix(in oklab, var(--base), transparent 8%);
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.38rem .65rem; border-radius:999px;
+  font-weight:700; font-size:.78rem; letter-spacing:.2px;
+  color:var(--ink-2);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%);
+  background: var(--bg);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.badge-skill:hover{
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--bdr), white 22%);
+  background: color-mix(in oklab, var(--base), transparent 4%);
+}
+
+/* لوح الكود */
+.code-slab{
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  position:relative; overflow:auto;
+}
+.code-slab pre{ margin:0; white-space:pre; font:600 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--t-1) }
+.code-slab .code{
+  display:block; padding: clamp(10px, 2.4vw, 14px);
+  color: var(--t-1);
+}
+.code-slab .code::selection{ background:#22d3ee33 }
+
+/* حركات ظهور عند الرؤية */
+.skill-card.reveal-in{
+  animation: s-reveal .55s cubic-bezier(.2,.6,.2,1) both;
+}
+@keyframes s-reveal{
+  from{ opacity:0; transform: translateY(10px) scale(.985) }
+  to  { opacity:1; transform: none }
+}
+
+/* تحسينات للهاتف */
+@media (max-width: 767.98px){
+  .skills .row.g-4>[class*="col-"]{ padding-inline:10px }
+  .skill-card{ padding:14px !important; box-shadow:0 8px 22px rgba(0,0,0,.28) }
+  .skill-bar{ --h: 9px }
+  .pct-chip{ font-size:.8rem }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width:360px){
+  .skill-ico{ --size: 44px }
+  .skill-head h6{ font-size: 1rem }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce){
+  .skill-card, .skill-ico::after, .skill-bar .fill.striped, .skill-card.reveal-in{ animation:none !important; transition:none !important }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============== Projects & Services – Pro (يندمج مع متغيراتك) =============== */
+/* يعتمد على: --t-1/--t-2/--brand/--brand-2/--accent/--paper/--bg-2/--border/--radius/--shadow */
+
+.projects, .services{
+  --ink: var(--t-1);
+  --ink-2: var(--t-2);
+  --g1: var(--brand);
+  --g2: var(--brand-2);
+  --acc: var(--accent);
+  --bdr: var(--border);
+  --base: var(--paper);
+  --r: clamp(14px, 3.5vw, var(--radius, 18px));
+
+  color: var(--ink);
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--g2), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--g1), transparent 92%) 0, transparent 60%);
+  background-color: transparent;
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* ===== عناوين الأقسام ===== */
+.projects .section-title, .services .section-title{
+  display:flex; align-items:center; gap:.6rem; margin:0 0 1.15rem;
+  font-weight:800; letter-spacing:.2px; position:relative; line-height:1.2;
+}
+.projects .section-title i, .services .section-title i{
+  font-size:1.05em;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 18px color-mix(in oklab, var(--g1), transparent 70%));
+}
+.projects .section-title::after, .services .section-title::after{
+  content:""; position:absolute; inset:auto 0 -10px auto; height:3px;
+  width:min(240px, 52%); border-radius:3px;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  opacity:.95;
+}
+
+/* ===== فلاتر المشاريع ===== */
+.filter-pill{
+  position:relative; border:none; cursor:pointer; font-weight:800;
+  color: var(--ink-2); background: color-mix(in oklab, var(--base), transparent 10%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%);
+  padding:.45rem .85rem; border-radius:999px; letter-spacing:.2px;
+  transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+}
+.filter-pill:hover{ transform: translateY(-2px); border-color: color-mix(in oklab, var(--bdr), white 22%) }
+.filter-pill.active{
+  color: var(--t-1);
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(0,0,0,.28);
+}
+
+/* ===== بطاقة مشروع ===== */
+.pro-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  backdrop-filter: saturate(130%) blur(5px); -webkit-backdrop-filter: saturate(130%) blur(5px);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  will-change: transform;
+}
+.pro-card:hover{
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--bdr), white 18%);
+  box-shadow: 0 20px 48px rgba(0,0,0,.46);
+}
+
+/* رأس المشروع */
+.proj-head{ display:flex; align-items:center; gap:.7rem; margin-bottom:.35rem }
+.proj-ico{
+  --size: clamp(40px, 11vw, 52px);
+  width:var(--size); height:var(--size); display:grid; place-items:center;
+  border-radius:14px; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.proj-ico::after{
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%);
+  animation: proj-pulse 2.6s ease-out infinite;
+}
+@keyframes proj-pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%) }
+  70%{  box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.proj-ico i{
+  font-size: clamp(18px, 6vw, 22px);
+  background: var(--icon-grad, linear-gradient(90deg,#9ae6ff,#b9b5ff));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 22px color-mix(in oklab, var(--g1), transparent 74%));
+}
+.proj-title{
+  margin:0; font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.06rem);
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.proj-sub{ margin:.2rem 0 .5rem; color:var(--ink-2); text-wrap:balance }
+
+/* الوسوم */
+.proj-tags{ display:flex; flex-wrap:wrap; gap:.4rem .5rem; margin-top:.15rem }
+.tag{
+  padding:.34rem .6rem; border-radius:999px; font-weight:700; font-size:.78rem; letter-spacing:.2px;
+  color:var(--ink-2);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%);
+  background: color-mix(in oklab, var(--base), transparent 10%);
+}
+
+/* رابط الإجراء */
+.proj-cta{
+  position:relative; display:inline-flex; align-items:center; gap:.45rem;
+  margin-top:.55rem; font-weight:800; letter-spacing:.2px;
+  color:var(--t-1); text-decoration:none;
+}
+.proj-cta span{ background: linear-gradient(90deg,var(--g1),var(--g2)); -webkit-background-clip:text; background-clip:text; color:transparent }
+.proj-cta i{ font-size:.9em; transform: translateY(1px) }
+.proj-cta::after{
+  content:""; position:absolute; inset:auto 0 -2px 0; height:2px; border-radius:2px;
+  background: linear-gradient(90deg,var(--g1),var(--g2)); opacity:.85;
+  transform-origin:left; transform: scaleX(.35); transition: transform .25s ease;
+}
+.proj-cta:hover::after{ transform: scaleX(1) }
+
+/* إضاءات ولمعة */
+.proj-edge{
+  position:absolute; inset:auto -26% -34% auto; width:min(58vmin,480px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter: blur(22px); opacity:.5;
+}
+.proj-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: proj-sheen 6s ease-in-out infinite;
+}
+@keyframes proj-sheen{
+  0%,8%{ transform:translateX(-120%) }
+  55%  { transform:translateX(120%) }
+  100% { transform:translateX(120%) }
+}
+
+/* حالة الإخفاء/الظهور مع الفلاتر */
+.project-card{ display:none }
+.project-card.show{ display:block }
+
+/* ===== بطاقات الخدمات ===== */
+.svc-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  backdrop-filter: saturate(130%) blur(5px); -webkit-backdrop-filter: saturate(130%) blur(5px);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+.svc-card:hover{
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--bdr), white 18%);
+  box-shadow: 0 20px 48px rgba(0,0,0,.46);
+}
+.svc-ico{
+  --size: clamp(42px, 12vw, 54px);
+  width:var(--size); height:var(--size); display:grid; place-items:center; border-radius:14px; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.svc-ico::after{
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g2), transparent 70%);
+  animation: svc-pulse 2.6s ease-out infinite;
+}
+@keyframes svc-pulse{
+  0%{   box-shadow:0 0 0 0 color-mix(in oklab, var(--g2), transparent 70%) }
+  70%{  box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.svc-card h6{
+  margin:0; font-weight:800; letter-spacing:.25px; line-height:1.25;
+  font-size: clamp(1rem, 4.2vw, 1.06rem);
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.svc-edge, .svc-sheen{ /* نفس زخارف المشروع */ }
+.svc-edge{
+  position:absolute; inset:auto -26% -34% auto; width:min(58vmin,480px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter: blur(22px); opacity:.5;
+}
+.svc-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: proj-sheen 6.2s ease-in-out infinite;
+}
+
+/* ظهور ناعم للبطاقات */
+.pro-card.reveal-in, .svc-card.reveal-in{ animation: pv-reveal .55s cubic-bezier(.2,.6,.2,1) both }
+@keyframes pv-reveal{
+  from{ opacity:0; transform: translateY(10px) scale(.985) }
+  to  { opacity:1; transform: none }
+}
+
+/* تحسينات الهاتف */
+@media (max-width: 767.98px){
+  .projects .row.g-3>[class*="col-"],
+  .services .row.g-3>[class*="col-"]{ padding-inline:10px }
+  .pro-card, .svc-card{ padding:14px !important; box-shadow:0 8px 22px rgba(0,0,0,.28) }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ====================== Testimonials + Contact + Footer (Pro, Mobile-first) ====================== */
+/* يعتمد على: --t-1/--t-2/--brand/--brand-2/--accent/--paper/--bg-2/--border/--radius/--shadow */
+
+.testimonials, .contact, .site-footer{
+  --ink: var(--t-1);
+  --ink-2: var(--t-2);
+  --g1: var(--brand);
+  --g2: var(--brand-2);
+  --acc: var(--accent);
+  --bdr: var(--border);
+  --base: var(--paper);
+  --r: clamp(14px, 3.5vw, var(--radius, 18px));
+  color: var(--ink);
+  background:
+    radial-gradient(120% 80% at 110% -10%, color-mix(in oklab, var(--g2), transparent 92%) 0, transparent 60%),
+    radial-gradient(120% 80% at -10% 110%, color-mix(in oklab, var(--g1), transparent 92%) 0, transparent 60%);
+  background-color: transparent;
+  padding-inline: max(12px, env(safe-area-inset-left));
+  padding-inline-end: max(12px, env(safe-area-inset-right));
+}
+
+/* ===== عناوين الأقسام ===== */
+.testimonials .section-title,
+.contact .section-title{
+  display:flex; align-items:center; gap:.6rem; margin:0 0 1.15rem;
+  font-weight:800; letter-spacing:.2px; position:relative; line-height:1.2;
+}
+.testimonials .section-title i,
+.contact .section-title i{
+  font-size:1.05em;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 18px color-mix(in oklab, var(--g1), transparent 70%));
+}
+.testimonials .section-title::after,
+.contact .section-title::after{
+  content:""; position:absolute; inset:auto 0 -10px auto; height:3px;
+  width:min(240px, 52%); border-radius:3px;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  opacity:.95;
+}
+
+/* ====================== Testimonials ====================== */
+.testi-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  backdrop-filter: saturate(130%) blur(5px); -webkit-backdrop-filter: saturate(130%) blur(5px);
+}
+.testi-card p{ color:var(--ink-2); font-size: clamp(.95rem, 3.6vw, 1rem); margin: .25rem 0 0 }
+
+.testi-avatar{
+  --s: clamp(46px, 12vw, 54px);
+  width:var(--s); height:var(--s); border-radius:16px;
+  display:grid; place-items:center; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.testi-avatar::after{
+  /* نبضة هادئة حول الصورة/الأيقونة */
+  content:""; position:absolute; inset:-8px; border-radius:inherit; pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%);
+  animation: tti-pulse 2.8s ease-out infinite;
+}
+@keyframes tti-pulse{
+  0%{ box-shadow:0 0 0 0 color-mix(in oklab, var(--g1), transparent 70%) }
+  70%{ box-shadow:0 0 0 18px transparent }
+  100%{ box-shadow:0 0 0 0 transparent }
+}
+.testi-avatar i{
+  font-size: clamp(18px, 6vw, 22px);
+  background: linear-gradient(90deg,#9ae6ff,#b9b5ff);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 8px 22px color-mix(in oklab, var(--g1), transparent 74%));
+}
+.testi-name{
+  display:block; font-weight:800;
+  background: linear-gradient(90deg, var(--ink), color-mix(in oklab, var(--ink), black 16%));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.testi-role{ color:var(--ink-2) }
+
+.testi-stars i{
+  margin-inline: 0 .05rem;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter: drop-shadow(0 6px 16px color-mix(in oklab, var(--g1), transparent 74%));
+}
+
+/* علامة الاقتباس */
+.quote-mark{
+  position:absolute; inset: clamp(10px, 3vw, 12px) clamp(10px, 3vw, 12px) auto auto;
+  opacity:.25; font-size: clamp(20px, 8vw, 28px);
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* لمعة + حافة ضوئية */
+.testi-edge{
+  position:absolute; inset:auto -26% -34% auto; width:min(58vmin,480px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter: blur(22px); opacity:.5;
+}
+.testi-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: testi-sheen 6s ease-in-out infinite;
+}
+@keyframes testi-sheen{
+  0%,8%{ transform:translateX(-120%) }
+  55%  { transform:translateX(120%) }
+  100% { transform:translateX(120%) }
+}
+
+/* مؤشرات الكاروسيل */
+.custom-indicators{
+  position:relative; gap:.4rem; margin-top: .75rem;
+}
+.custom-indicators [data-bs-target]{
+  width: 9px; height: 9px; border-radius:50%; border:1px solid color-mix(in oklab, var(--bdr), white 18%);
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.custom-indicators .active{
+  transform: scale(1.15);
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(0,0,0,.28);
+}
+
+/* شريط تقدم أعلى البطاقة يملأ خلال زمن السلايد */
+.testi-progress{
+  position:absolute; inset:0 0 auto 0; height:3px; border-radius:3px 3px 0 0;
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+  transform-origin:left; transform: scaleX(0);
+}
+
+/* ====================== Contact ====================== */
+.contact-card{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(130% 100% at 110% -10%, color-mix(in oklab, var(--g1), transparent 93%) 0, transparent 60%),
+    radial-gradient(120% 100% at -20% 30%, color-mix(in oklab, var(--g2), transparent 94%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  border-radius: var(--r);
+  box-shadow: var(--shadow, 0 10px 28px rgba(0,0,0,.32));
+  backdrop-filter: saturate(130%) blur(5px); -webkit-backdrop-filter: saturate(130%) blur(5px);
+}
+
+/* حقول نموذج بداخل غلاف أيقونة */
+.input-wrap{ position:relative }
+.input-wrap .form-label{ font-weight:800; color:var(--ink); margin-bottom:.25rem }
+.input-wrap .fi{
+  position:absolute; inset:auto clamp(10px, 3vw, 12px) clamp(10px, 3vw, 12px) auto;
+  transform: translateY(calc(50% + 2px)); opacity:.55; pointer-events:none;
+}
+.form-control, textarea.form-control{
+  color:var(--ink); background: color-mix(in oklab, var(--base), transparent 10%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%); border-radius:12px;
+  padding: .55rem .9rem; padding-inline-start: 2.2rem;
+}
+.form-control:focus, textarea.form-control:focus{
+  outline:0; border-color: color-mix(in oklab, var(--g1), white 20%);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--g1), transparent 82%);
+}
+
+/* أزرار الاتصال (لو ما عندك ستايل جاهز لها) */
+.btn.btn-brand{
+  background: linear-gradient(90deg,var(--g1),var(--g2)); color:#fff; font-weight:800; border:none;
+  border-radius:999px; padding:.55rem 1rem; box-shadow: 0 10px 22px rgba(0,0,0,.28);
+}
+.btn.btn-ghost{
+  background: color-mix(in oklab, var(--base), transparent 10%); color:var(--ink);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%); border-radius:999px; padding:.55rem 1rem; font-weight:800;
+}
+.btn.btn-ghost:hover{ border-color: color-mix(in oklab, var(--bdr), white 22%) }
+
+/* عناصر معلومات الاتصال */
+.contact-item{
+  display:flex; gap:.7rem; align-items:flex-start; margin-bottom:.7rem;
+}
+.contact-ico{
+  --s: clamp(40px, 11vw, 52px); width:var(--s); height:var(--s);
+  display:grid; place-items:center; border-radius:14px; position:relative; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border: 1px solid color-mix(in oklab, var(--bdr), white 12%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.contact-ico i{
+  background: linear-gradient(90deg,#9ae6ff,#b9b5ff);
+  -webkit-background-clip:text; background-clip:text; color:transparent; font-size: clamp(18px, 6vw, 22px);
+}
+.contact .lbl{ font-weight:800; color:var(--ink) }
+.contact .val{ color:var(--ink-2) }
+.contact .val.link{ color:var(--t-1); text-decoration:none }
+.contact .val.link:hover{ text-decoration:underline }
+
+/* الشبكات الاجتماعية */
+.social a{
+  width:40px; height:40px; display:grid; place-items:center; border-radius:12px;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+  color:var(--t-1); text-decoration:none; transition: transform .18s ease, border-color .18s ease;
+}
+.social a:hover{ transform: translateY(-2px); border-color: color-mix(in oklab, var(--bdr), white 22%) }
+
+/* زخارف ولمعة */
+.contact-edge, .contact-sheen{ position:absolute; inset:0; pointer-events:none }
+.contact-edge{
+  inset:auto -26% -34% auto; width:min(58vmin,480px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter: blur(22px); opacity:.5;
+}
+.contact-sheen{
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: testi-sheen 6.2s ease-in-out infinite;
+}
+
+/* ====================== Footer ====================== */
+.site-footer{
+  position:relative; overflow:hidden; isolation:isolate;
+  background:
+    radial-gradient(120% 120% at 110% -10%, color-mix(in oklab, var(--g1), transparent 90%) 0, transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--base), transparent 0%), color-mix(in oklab, var(--base), transparent 8%));
+  border-top:1px solid color-mix(in oklab, var(--bdr), white 12%);
+}
+.brand-badge{
+  --s: 38px; width:var(--s); height:var(--s); display:grid; place-items:center; border-radius:12px;
+  background: color-mix(in oklab, var(--base), transparent 12%);
+  border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+}
+.brand-text{ font-weight:900; letter-spacing:.2px }
+.brand-accent{ background: linear-gradient(90deg,var(--g1),var(--g2)); -webkit-background-clip:text; background-clip:text; color:transparent }
+
+.footer-edge{
+  position:absolute; inset:auto -26% 0 auto; width:min(64vmin,520px); aspect-ratio:1/1; z-index:-1;
+  background:
+    radial-gradient(closest-side, color-mix(in oklab, var(--g1), transparent 78%) 0, transparent 60%),
+    radial-gradient(closest-side, color-mix(in oklab, var(--g2), transparent 80%) 0, transparent 60%);
+  filter: blur(24px); opacity:.5;
+}
+
+/* زر للأعلى */
+.to-top{
+  position:relative; border-radius:999px; font-weight:800; letter-spacing:.2px; overflow:hidden;
+  background: color-mix(in oklab, var(--base), transparent 10%); color:var(--t-1);
+  border:1px solid color-mix(in oklab, var(--bdr), white 14%);
+}
+.toTop-sheen{
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background: linear-gradient(110deg, transparent 0%, #ffffff10 50%, transparent 100%);
+  transform: translateX(-120%); opacity:.46;
+  animation: testi-sheen 6.6s ease-in-out infinite;
+}
+
+/* ظهور ناعم */
+.testi-card.reveal-in, .contact-card.reveal-in{ animation: sec-reveal .55s cubic-bezier(.2,.6,.2,1) both }
+@keyframes sec-reveal{
+  from{ opacity:0; transform: translateY(10px) scale(.985) }
+  to  { opacity:1; transform: none }
+}
+
+/* تحسينات الهاتف */
+@media (max-width: 767.98px){
+  .testimonials .carousel-inner{ padding-inline:10px }
+  .testi-card, .contact-card{ padding:14px !important; box-shadow:0 8px 22px rgba(0,0,0,.28) }
+}
+
+
+</style>
+
+</style>
+  </style>
+</head>
+
+<body>
+  <!-- App Bar -->
+  <header class="appbar">
+    <div class="container nav-wrap">
+      <!-- شعار -->
+      <a class="brand" href="#home" aria-label="الانتقال إلى الرئيسية">
+        <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
+        <span class="brand-title">سيرة <span class="brand-accent">هاني</span></span>
+      </a>
+
+      <!-- روابط سطح المكتب (وسط) -->
+      <ul class="main-links" role="menubar">
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#home">الرئيسية</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#content">المؤهلات</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#content3">الدورات</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#content2">الخبرة</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#content4">المهارات</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#content6">المشاريع</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#services">الخدمات</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#testimonials">آراء</a></li>
+        <li class="nav-item" role="none"><a class="nav-link" role="menuitem" href="#contact">تواصل</a></li>
+      </ul>
+
+      <!-- أزرار -->
+      <div class="actions">
+        <a class="btn btn-brand d-none d-lg-inline-flex" href="#" onclick="alert('أضف رابط CV.pdf هنا');return false;">
+          <i class="fa-solid fa-download ms-1"></i><span>تحميل السيرة</span>
         </a>
-    
-        <!-- Toggler -->
-        <button class="navbar-toggler nav-toggle btn-ghost" type="button"
+        <button class="nav-toggle" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav"
-                aria-controls="offcanvasNav" aria-label="فتح القائمة">
+                aria-controls="offcanvasNav" aria-expanded="false" aria-label="فتح القائمة">
           <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-xmark"></i>
         </button>
-    
-        <!-- Drawer -->
-        <div class="offcanvas offcanvas-end nav-drawer" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavLabel">القائمة</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
-          </div>
-    
-          <div class="offcanvas-body">
-            <ul class="navbar-nav flex-grow-1 align-items-lg-center gap-1 nav-rtl" id="mainNavList">
-              <li class="nav-item"><a class="nav-link" href="#home"><i class="fa-solid fa-house ms-1"></i><span>الرئيسية</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#content"><i class="fa-solid fa-user-graduate ms-1"></i><span>المؤهلات</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#content3"><i class="fa-solid fa-certificate ms-1"></i><span>الدورات</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#content2"><i class="fa-solid fa-briefcase ms-1"></i><span>الخبرة</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#content4"><i class="fa-solid fa-microchip ms-1"></i><span>المهارات</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#content6"><i class="fa-solid fa-diagram-project ms-1"></i><span>المشاريع</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#services"><i class="fa-solid fa-wand-magic-sparkles ms-1"></i><span>الخدمات</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fa-solid fa-comment-dots ms-1"></i><span>آراء</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i><span>تواصل</span></a></li>
-            </ul>
-    
-            <div class="d-flex gap-2 mt-3 mt-lg-0">
-              <a class="btn btn-brand" href="#" onclick="alert('أضف CV.pdf وضع رابطه هنا');return false;">
-                <i class="fa-solid fa-download ms-1"></i>تحميل السيرة
-              </a>
-            </div>
-          </div>
-    
-          <div class="drawer-edge"></div>
-        </div>
-    
-        <!-- الحبر المتحرك أسفل الرابط (سطح المكتب فقط) -->
-        <span class="nav-ink d-none d-lg-block" aria-hidden="true"></span>
       </div>
-    </nav>
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="row align-items-center g-4" data-aos="fade-up">
+      <div id="scrollProgress" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero-luxe">
+    <div class="container">
+      <div class="hero-card" data-animate>
+        <div class="row align-items-center g-4">
           <!-- Avatar -->
-          <div class="col-md-auto">
-            <div class="avatar-shell">
-              <div class="avatar aura">
-                <img src="project\assets\img\h2.jpg" alt="صورة هاني حسن قايد البخيتي" loading="lazy">
+          <div class="col-12 col-md-auto text-center">
+            <figure class="avatar-stack" aria-label="صورة هاني حسن قايد البخيتي">
+              <div class="avatar">
+                <!-- استخدم شرطة مائلة للأمام في المسار -->
+                <img src="./assets/img/h2.jpg" alt="صورة هاني حسن قايد البخيتي" loading="lazy" width="220" height="220">
+                <span class="ring" aria-hidden="true"></span>
+                <span class="shine" aria-hidden="true"></span>
               </div>
-              <div class="avatar-ring" aria-hidden="true"></div>
-            </div>
+            </figure>
           </div>
-    
+  
           <!-- Text -->
           <div class="col text-md-start text-center">
-            <h1 class="display-5 fw-extrabold hero-title">
-              هاني حسن قايد البخيتي
-            </h1>
-    
+            <h1 class="hero-title fw-800">هاني حسن قايد البخيتي</h1>
+  
             <p class="hero-subtitle mb-2">
-              <span id="typeTarget" class="type"></span>
+              <span id="typeTarget" class="type"
+                    data-strings='["مطور واجهات أمامية","مصمم UI/UX","مهتم بالتقنية والابتكار"]'></span>
             </p>
-    
+  
             <!-- Chips -->
             <ul class="hero-chips list-unstyled d-flex flex-wrap gap-2 mb-3 justify-content-center justify-content-md-start">
-              <li><span class="chip chip-white"><i class="fa-solid fa-location-dot"></i> صنعاء – اليمن (الثورة)</span></li>
-              <li><a class="chip chip-white" href="mailto:hani20047@gmail.com"><i class="fa-solid fa-envelope"></i> hani20047@gmail.com</a></li>
-              <li><a class="chip chip-white" href="tel:+967777704977"><i class="fa-solid fa-phone"></i> 777704977</a></li>
-              <li><span class="chip"><i class="fa-solid fa-cake-candles"></i> 2001/06/12</span></li>
+              <li><span class="chip chip-glass"><i class="fa-solid fa-location-dot"></i> صنعاء – اليمن (الثورة)</span></li>
+              <li><a class="chip chip-glass" href="mailto:hani20047@gmail.com"><i class="fa-solid fa-envelope"></i> hani20047@gmail.com</a></li>
+              <li><a class="chip chip-glass" href="tel:+967777704977"><i class="fa-solid fa-phone"></i> 777704977</a></li>
+  
+              <!-- التاريخ بلون أبيض بالكامل -->
+              <li>
+                <span class="chip chip-solid" style="color:#fff">
+                  <i class="fa-solid fa-cake-candles" style="color:#fff;background:none"></i> 2001/06/12
+                </span>
+              </li>
             </ul>
-    
+  
             <!-- CTA -->
             <div class="hero-cta d-flex flex-wrap gap-2 justify-content-center justify-content-md-start">
-              <a class="btn btn-brand" href="#content6"><i class="fa-solid fa-rocket ms-1"></i> أعمالي</a>
-              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i> تواصل معي</a>
+              <a class="btn btn-luxe" href="#content6"><i class="fa-solid fa-rocket ms-1"></i> أعمالي</a>
+              <a class="btn btn-ghost-luxe" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i> تواصل معي</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    
   
-    <!-- Tech Stats -->
-    <section id="stats" class="stats-section py-4">
-      <div class="container" data-aos="zoom-in">
-        <div class="row g-3 metrics">
-          <!-- Stat -->
-          <div class="col-6 col-md-4">
-            <div class="card stat stat--ultra p-3" aria-label="مشاريع موثّقة">
-              <div class="stat-icon">
-                <i class="fa-solid fa-diagram-project"></i>
-              </div>
-              <div class="num" data-count="6">0</div>
-              <div class="lbl">مشاريع موثّقة</div>
-              <span class="stat-glow" aria-hidden="true"></span>
-              <span class="stat-spark" aria-hidden="true"></span>
-            </div>
-          </div>
-    
-          <!-- Stat -->
-          <div class="col-6 col-md-4">
-            <div class="card stat stat--ultra p-3" aria-label="دورات وشهادات">
-              <div class="stat-icon">
-                <i class="fa-solid fa-award"></i>
-              </div>
-              <div class="num" data-count="8">0</div>
-              <div class="lbl">دورات وشهادات</div>
-              <span class="stat-glow" aria-hidden="true"></span>
-              <span class="stat-spark" aria-hidden="true"></span>
-            </div>
-          </div>
-    
-          <!-- Stat -->
-          <div class="col-12 col-md-4">
-            <div class="card stat stat--ultra p-3" aria-label="مهارات رئيسية">
-              <div class="stat-icon">
-                <i class="fa-solid fa-microchip"></i>
-              </div>
-              <div class="num" data-count="8">0</div>
-              <div class="lbl">مهارات رئيسية</div>
-              <span class="stat-glow" aria-hidden="true"></span>
-              <span class="stat-spark" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
+        <!-- زخرفة خفيفة -->
+        <span class="grid" aria-hidden="true"></span>
+        <span class="edge" aria-hidden="true"></span>
+        <span class="spot" aria-hidden="true"></span>
       </div>
-    </section>
-    
+    </div>
+  </section>
   
-    <!-- Qualifications -->
-    <section id="content" class="py-5 quals">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-user-graduate ms-2"></i>المؤهلات
-        </h2>
-    
-        <div class="row g-4">
-          <!-- مؤهل -->
-          <div class="col-md-6">
-            <article class="qual-card p-4 h-100">
-              <div class="qual-icon-wrap">
-                <div class="qual-icon-glow"></div>
-                <span class="qual-icon"><i class="fa-solid fa-laptop-code"></i></span>
-              </div>
-              <h5 class="qual-title mt-3">بكالوريوس تقنية معلومات</h5>
-              <p class="qual-sub">جامعة العلوم والتكنولوجيا – تقدير ممتاز.</p>
-              <span class="qual-light"></span>
-            </article>
-          </div>
-    
-          <!-- مؤهل -->
-          <div class="col-md-6">
-            <article class="qual-card p-4 h-100">
-              <div class="qual-icon-wrap">
-                <div class="qual-icon-glow"></div>
-                <span class="qual-icon"><i class="fa-solid fa-language"></i></span>
-              </div>
-              <h5 class="qual-title mt-3">دبلوم لغة إنجليزية</h5>
-              <p class="qual-sub">Excel ETA – تقدير ممتاز.</p>
-              <span class="qual-light"></span>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-  
-  <!-- Certifications -->
-  <section id="content3" class="py-5 certs">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-certificate ms-2"></i>الدورات والشهادات
-        </h2>
-    
-        <div class="row g-3">
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-shield-halved"></i></span>
-                <h6 class="cert-title">Intro to Diploma – Red Nexus</h6>
-              </header>
-              <p class="cert-desc">دبلومة (أمن معلومات/Red Teaming) – 120+ ساعة تدريبية.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-flag"></i></span>
-                <h6 class="cert-title">CTF & Hack The Box</h6>
-              </header>
-              <p class="cert-desc">تأهيل عملي على CTF ومختبرات Hack The Box (مستويات أساسية–متوسطة).</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-id-card"></i></span>
-                <h6 class="cert-title">ICDL</h6>
-              </header>
-              <p class="cert-desc">شهادة ICDL الدولية.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-user-graduate"></i></span>
-                <h6 class="cert-title">المهارات الأكاديمية المتميزة</h6>
-              </header>
-              <p class="cert-desc">دورة المهارات الأكاديمية المتميزة.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-comments"></i></span>
-                <h6 class="cert-title">مهارات التواصل</h6>
-              </header>
-              <p class="cert-desc">دورة مهارات التواصل.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-users-gear"></i></span>
-                <h6 class="cert-title">تنمية مهارات القيادة</h6>
-              </header>
-              <p class="cert-desc">دورة تنمية مهارات القيادة.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-brain"></i></span>
-                <h6 class="cert-title">التفكير الناقد</h6>
-              </header>
-              <p class="cert-desc">دورة التفكير الناقد.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-network-wired"></i></span>
-                <h6 class="cert-title">CCNA</h6>
-              </header>
-              <p class="cert-desc">شبكات سيسكو (CCNA).</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-brands fa-linux"></i></span>
-                <h6 class="cert-title">مقدمة في لينكس – Cisco</h6>
-              </header>
-              <p class="cert-desc">مقدمة في لينكس – Cisco.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <!-- بطاقة -->
-          <div class="col-md-6">
-            <article class="cert-card card p-3 h-100">
-              <header class="cert-head">
-                <span class="cert-icon"><i class="fa-solid fa-trophy"></i></span>
-                <h6 class="cert-title">شهادتا تقدير</h6>
-              </header>
-              <p class="cert-desc">Excel ETA &amp; امتياز.</p>
-              <span class="cert-edge" aria-hidden="true"></span>
-              <span class="cert-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-  
-    <!-- Experience Timeline -->
-    <section id="content2" class="py-5 experience">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-briefcase ms-2"></i>الخبرة والمشاريع (خط زمني)
-        </h2>
-    
-        <div class="card p-4">
-          <div class="t-grid">
-            <div class="t-line" aria-hidden="true"></div>
-    
-            <!-- 1 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-shield-halved"></i></span>
-                <h5 class="mb-1">اختبار اختراق الويب وواجهات الـ API</h5>
-              </div>
-              <p class="mb-0 text-white">تطبيق عملي على OWASP Top 10، تحليل الطلبات/الاستجابات، واستغلال ثغرات شائعة وتوثيقها.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 2 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-user-ninja"></i></span>
-                <h5 class="mb-1">Red Teaming &amp; OSINT</h5>
-              </div>
-              <p class="mb-0 text-white">جمع معلومات مفتوحة المصدر، إعداد OPSEC، ومحاكاة خطوات الخصم ضمن سيناريوهات مقيّدة أخلاقيًا.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 3 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
-                <h5 class="mb-1">اختبار تطبيقات الموبايل</h5>
-              </div>
-              <p class="mb-0 text-white">فهم سلاسل الثقة، اعتراض الترافيك، وتحليل الـ APK والتخاطب الخلفي بأدوات مناسبة.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 4 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-toolbox"></i></span>
-                <h5 class="mb-1">أدوات واختراقات عملية</h5>
-              </div>
-              <p class="mb-0 text-white">Kali Linux، Nmap، Burp Suite، Metasploit، Wireshark، OWASP ZAP؛ إعداد بيئات اختبار آمنة.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 5 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-bug"></i></span>
-                <h5 class="mb-1">تقارير الثغرات وBug Bounty</h5>
-              </div>
-              <p class="mb-0 text-white">صياغة تقارير احترافية (PoC/Impact/Remediation) وجهوزية للمشاركة في برامج المكافآت.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 6 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-lock"></i></span>
-                <h5 class="mb-1">أساسيات التشفير والبرمجيات الخبيثة</h5>
-              </div>
-              <p class="mb-0 text-white">مفاهيم التعمية، آليات عمل البرمجيات الخبيثة، ومبادئ الوقاية والتحليل المبدئي.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 7 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-gauge-high"></i></span>
-                <h5 class="mb-1">اختبارات الضغط (DoS) – بيئات معملية</h5>
-              </div>
-              <p class="mb-0 text-white">محاكاة هجمات حِمل ضمن مختبرات خاصة مع مراعاة القوانين والأخلاقيات.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 8 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-people-group"></i></span>
-                <h5 class="mb-1">قيادة فرق عمل</h5>
-              </div>
-              <p class="mb-0 text-white">قيادة فرق في مشاريع جامعية والعمل بروح الفريق.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 9 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-fire"></i></span>
-                <h5 class="mb-1">Flutter + Firebase</h5>
-              </div>
-              <p class="mb-0 text-white">تطوير تطبيقات جوال وربطها بقاعدة بيانات سحابية.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 10 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-database"></i></span>
-                <h5 class="mb-1">مشروع التخرج – VIMS</h5>
-              </div>
-              <p class="mb-0 text-white">نظام إدارة السكان بخصائص عدّ وتتبع وتحليل.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 11 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-clipboard-list"></i></span>
-                <h5 class="mb-1">تطبيق عدّ سكاني للأحياء</h5>
-              </div>
-              <p class="mb-0 text-white">حل ميداني لجمع البيانات السكنية.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-            <!-- 12 -->
-            <article class="t-card">
-              <div class="t-head">
-                <span class="t-ico"><i class="fa-solid fa-pen-ruler"></i></span>
-                <h5 class="mb-1">تصميمات عبر Figma</h5>
-              </div>
-              <p class="mb-0 text-white">Depts / تطبيق طبي / موقع شخصي.</p>
-              <span class="t-sheen" aria-hidden="true"></span>
-            </article>
-    
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Skills -->
-    <section id="content4" class="py-5 skills">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-microchip ms-2"></i>المهارات التقنية
-        </h2>
-    
-        <div class="row g-4">
-          <!-- أمن المعلومات -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-shield-halved"></i></span>
-                  <h6 class="mb-0">أمن المعلومات وRed Teaming</h6>
-                </div>
-                <span class="pct-chip">65%</span>
-              </header>
-              <div class="skill-bar"><span class="fill striped" style="--w:65%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Flutter -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
-                  <h6 class="mb-0">Flutter (تطبيقات جوال)</h6>
-                </div>
-                <span class="pct-chip">90%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:90%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Front-End -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-code"></i></span>
-                  <h6 class="mb-0">واجهات ويب (Front-End)</h6>
-                </div>
-                <span class="pct-chip">75%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:75%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Back-End -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-server"></i></span>
-                  <h6 class="mb-0">Back-End أساسي</h6>
-                </div>
-                <span class="pct-chip">65%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:65%"></span></div>
-            </article>
-          </div>
-    
-          <!-- DSA -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-diagram-project"></i></span>
-                  <h6 class="mb-0">هياكل البيانات والخوارزميات</h6>
-                </div>
-                <span class="pct-chip">80%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Databases -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-database"></i></span>
-                  <h6 class="mb-0">قواعد بيانات (MySQL / Firebase)</h6>
-                </div>
-                <span class="pct-chip">85%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:85%"></span></div>
-            </article>
-          </div>
-    
-          <!-- APIs & State -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-solid fa-plug"></i></span>
-                  <h6 class="mb-0">APIs وإدارة الحالة (GetX/Provider)</h6>
-                </div>
-                <span class="pct-chip">78%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:78%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Figma -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-brands fa-figma"></i></span>
-                  <h6 class="mb-0">تصميم عبر Figma</h6>
-                </div>
-                <span class="pct-chip">70%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:70%"></span></div>
-            </article>
-          </div>
-    
-          <!-- Git -->
-          <div class="col-md-6">
-            <article class="card skill-card p-3 h-100">
-              <header class="skill-head d-flex align-items-center justify-content-between mb-2">
-                <div class="d-flex align-items-center gap-2">
-                  <span class="skill-ico"><i class="fa-brands fa-git-alt"></i></span>
-                  <h6 class="mb-0">Git &amp; GitHub</h6>
-                </div>
-                <span class="pct-chip">80%</span>
-              </header>
-              <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
-            </article>
-          </div>
-        </div>
-    
-        <!-- Cloud of badges (كما هي مع لمسة أنعم) -->
-        <div class="skill-cloud mt-3 d-flex flex-wrap gap-2">
-          <span class="badge badge-skill">Dart</span>
-          <span class="badge badge-skill">TypeScript</span>
-          <span class="badge badge-skill">REST</span>
-          <span class="badge badge-skill">JSON</span>
-          <span class="badge badge-skill">OAuth</span>
-          <span class="badge badge-skill">CI/CD</span>
-          <span class="badge badge-skill">Kali Linux</span>
-          <span class="badge badge-skill">Nmap</span>
-          <span class="badge badge-skill">Burp Suite</span>
-          <span class="badge badge-skill">Metasploit</span>
-          <span class="badge badge-skill">Wireshark</span>
-          <span class="badge badge-skill">OWASP ZAP</span>
-          <span class="badge badge-skill">OSINT</span>
-          <span class="badge badge-skill">CTF</span>
-        </div>
-    
-        <!-- يبقى كود السطر البرمجي كما هو -->
-        <div class="card code-slab p-3 mt-3">
-    <pre><code class="code">// Flutter: مثال استدعاء API
-    Future&lt;Response&gt; getUsers() async {
-      final res = await http.get(Uri.parse('https://api.example.com/users'));
-      if(res.statusCode==200){ return res; }
-      throw Exception('خطأ في الاتصال');
-    }</code></pre>
-        </div>
-      </div>
-    </section>
-    
-  
-    <!-- Projects with filter -->
-    <section id="content6" class="py-5 projects">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-diagram-project ms-2"></i>المشاريع
-        </h2>
-    
-        <!-- فلاتر -->
-        <ul class="nav nav-pills gap-2 mb-3">
-          <li class="nav-item"><button class="nav-link filter-pill active" data-filter="all">الكل</button></li>
-          <li class="nav-item"><button class="nav-link filter-pill" data-filter="app">تطبيقات</button></li>
-          <li class="nav-item"><button class="nav-link filter-pill" data-filter="web">ويب</button></li>
-          <li class="nav-item"><button class="nav-link filter-pill" data-filter="design">تصميم</button></li>
-        </ul>
-    
-        <!-- شبكة المشاريع -->
-        <div class="row g-3" id="projects">
-          <!-- كرت -->
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
-                <h6 class="proj-title">Amer Al-Khamisi / تطبيق</h6>
-              </header>
-              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
-              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/qhovmmNTct7NEpGbm4lpr4/App%2F%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge" aria-hidden="true"></span>
-              <span class="proj-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-    
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-database"></i></span>
-                <h6 class="proj-title">Amer Al-Khamisi / ويب</h6>
-              </header>
-              <p class="proj-sub">نظام متكامل لإدارة بيانات السكان.</p>
-              <div class="proj-tags"><span class="tag">Web</span><span class="tag">Dashboard</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/biEEFYTtSzWXkv2P5U5o8g/%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge"></span><span class="proj-sheen"></span>
-            </article>
-          </div>
-    
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="design">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-cart-shopping"></i></span>
-                <h6 class="proj-title">Tknohiah</h6>
-              </header>
-              <p class="proj-sub">واجهات متجر إلكتروني بواجهة جذابة.</p>
-              <div class="proj-tags"><span class="tag">Figma</span><span class="tag">UI/UX</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/iFH58KRYopwEo76t4fJD9A/Tknohiah?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge"></span><span class="proj-sheen"></span>
-            </article>
-          </div>
-    
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
-                <h6 class="proj-title">HNTL / تطبيق</h6>
-              </header>
-              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
-              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/VQlTAhldY0iEXMhZtlYdl4/HNTL%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge"></span><span class="proj-sheen"></span>
-            </article>
-          </div>
-    
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
-                <h6 class="proj-title">فلذة كبدي / تطبيق</h6>
-              </header>
-              <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
-              <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/6SqhsIz3b8vME9NCzYElcB/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge"></span><span class="proj-sheen"></span>
-            </article>
-          </div>
-    
-          <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
-            <article class="card pro-card h-100 p-3 tilt">
-              <header class="proj-head">
-                <span class="proj-ico"><i class="fa-solid fa-globe"></i></span>
-                <h6 class="proj-title">فلذة كبدي / ويب</h6>
-              </header>
-              <p class="proj-sub">لوحات تحكم ويب للمشروع.</p>
-              <div class="proj-tags"><span class="tag">Web</span><span class="tag">Admin</span></div>
-              <a class="proj-cta stretched-link" href="https://www.figma.com/file/VGnKOqT1iQlLju5qCYEubK/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=1-450&mode=design" target="_blank" rel="noopener">
-                <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="proj-edge"></span><span class="proj-sheen"></span>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    
-    <!-- Services -->
-    <!-- Services -->
-  <section id="services" class="py-5 services">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-wand-magic-sparkles ms-2"></i>الخدمات
-        </h2>
-        <div class="row g-3">
-          <div class="col-md-6 col-lg-3">
-            <article class="card svc-card p-3 h-100 tilt">
-              <span class="svc-ico mb-2"><i class="fa-solid fa-shield-halved"></i></span>
-              <h6 class="mb-1">اختبار اختراق مبدئي</h6>
-              <p class="text-white mb-0">فحص أساسي لتطبيقات الويب/API ورفع تقرير ملاحظات وتحسينات.</p>
-              <span class="svc-edge" aria-hidden="true"></span>
-              <span class="svc-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="card svc-card p-3 h-100 tilt">
-              <span class="svc-ico mb-2"><i class="fa-solid fa-mobile-screen-button"></i></span>
-              <h6 class="mb-1">تطوير تطبيقات Flutter</h6>
-              <p class="text-white mb-0">بناء تطبيقات عالية الأداء لأنظمة Android و iOS.</p>
-              <span class="svc-edge"></span><span class="svc-sheen"></span>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="card svc-card p-3 h-100 tilt">
-              <span class="svc-ico mb-2"><i class="fa-solid fa-window-restore"></i></span>
-              <h6 class="mb-1">واجهات ويب حديثة</h6>
-              <p class="text-white mb-0">تصميم Front-End احترافي سريع الاستجابة.</p>
-              <span class="svc-edge"></span><span class="svc-sheen"></span>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="card svc-card p-3 h-100 tilt">
-              <span class="svc-ico mb-2"><i class="fa-solid fa-database"></i></span>
-              <h6 class="mb-1">قواعد بيانات</h6>
-              <p class="text-white mb-0">تصميم مخططات MySQL ودمج Firebase.</p>
-              <span class="svc-edge"></span><span class="svc-sheen"></span>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="card svc-card p-3 h-100 tilt">
-              <span class="svc-ico mb-2"><i class="fa-solid fa-palette"></i></span>
-              <h6 class="mb-1">تصميم UI/UX</h6>
-              <p class="text-white mb-0">نماذج أولية عالية الدقة عبر Figma.</p>
-              <span class="svc-edge"></span><span class="svc-sheen"></span>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-5 testimonials">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-comment-dots ms-2"></i>آراء العملاء
-        </h2>
-    
-        <div id="testiCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5200" data-bs-touch="true">
-          <!-- مؤشرات -->
-          <div class="carousel-indicators custom-indicators">
-            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="0" class="active" aria-label="1"></button>
-            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="1" aria-label="2"></button>
-            <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="2" aria-label="3"></button>
-          </div>
-    
-          <div class="carousel-inner">
-    
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-              <article class="card testi-card p-4">
-                <span class="testi-progress" aria-hidden="true"></span>
-                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
-                  <div class="d-flex align-items-center gap-2">
-                    <span class="testi-avatar"><i class="fa-solid fa-user"></i></span>
-                    <div class="testi-meta">
-                      <strong class="testi-name">عميل متجر إلكتروني</strong>
-                      <small class="testi-role">تجارة إلكترونية</small>
-                    </div>
-                  </div>
-                  <div class="testi-stars" aria-label="5 من 5">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                  </div>
-                </div>
-    
-                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
-                <p class="mb-1">“واجهات أنيقة وتسليم في الوقت. تجربة رائعة.”</p>
-                <span class="testi-edge"></span>
-                <span class="testi-sheen" aria-hidden="true"></span>
-              </article>
-            </div>
-    
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-              <article class="card testi-card p-4">
-                <span class="testi-progress" aria-hidden="true"></span>
-                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
-                  <div class="d-flex align-items-center gap-2">
-                    <span class="testi-avatar"><i class="fa-solid fa-users"></i></span>
-                    <div class="testi-meta">
-                      <strong class="testi-name">فريق مشروع جامعي</strong>
-                      <small class="testi-role">تطبيق Flutter</small>
-                    </div>
-                  </div>
-                  <div class="testi-stars" aria-label="5 من 5">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                  </div>
-                </div>
-    
-                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
-                <p class="mb-1">“تطبيق Flutter سريع ومستقر كما طُلب بالضبط.”</p>
-                <span class="testi-edge"></span>
-                <span class="testi-sheen" aria-hidden="true"></span>
-              </article>
-            </div>
-    
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-              <article class="card testi-card p-4">
-                <span class="testi-progress" aria-hidden="true"></span>
-                <div class="testi-top d-flex align-items-center justify-content-between mb-2">
-                  <div class="d-flex align-items-center gap-2">
-                    <span class="testi-avatar"><i class="fa-solid fa-stethoscope"></i></span>
-                    <div class="testi-meta">
-                      <strong class="testi-name">عميل تطبيق طبي</strong>
-                      <small class="testi-role">واجهات ويب</small>
-                    </div>
-                  </div>
-                  <div class="testi-stars" aria-label="5 من 5">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                  </div>
-                </div>
-    
-                <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
-                <p class="mb-1">“احترافية في التعامل ومرونة في التعديلات.”</p>
-                <span class="testi-edge"></span>
-                <span class="testi-sheen" aria-hidden="true"></span>
-              </article>
-            </div>
-    
-          </div>
-    
-          <button class="carousel-control-prev" type="button" data-bs-target="#testiCarousel" data-bs-slide="prev" aria-label="السابق">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#testiCarousel" data-bs-slide="next" aria-label="التالي">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-    </section>
 
-    
-  <!-- Contact -->
-  <section id="contact" class="py-5 contact">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title h3 mb-4">
-          <i class="fa-solid fa-paper-plane ms-2"></i>تواصل معي
-        </h2>
-    
-        <div class="row g-3">
-          <!-- Form -->
-          <div class="col-md-6">
-            <article class="card contact-card p-3 h-100">
-              <form id="contactForm" onsubmit="alert('يمكن ربط الإرسال بـ Formspree / Backend لاحقًا');return false;">
-                <!-- الاسم -->
-                <div class="mb-3 input-wrap">
-                  <label class="form-label">الاسم</label>
-                  <i class="fi fa-solid fa-user"></i>
-                  <input type="text" class="form-control" required>
+
+
+
+
+
+
+<section id="stats" class="stats-section py-4">
+  <div class="container" data-aos="zoom-in">
+    <div class="row g-3 metrics">
+      <!-- Stat -->
+      <div class="col-6 col-md-4">
+        <div class="card stat stat--ultra p-3" tabindex="0" aria-label="مشاريع موثّقة">
+          <div class="stat-icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <div class="num" data-count="6">0</div>
+          <div class="lbl">مشاريع موثّقة</div>
+          <span class="stat-glow" aria-hidden="true"></span>
+          <span class="stat-spark" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- Stat -->
+      <div class="col-6 col-md-4">
+        <div class="card stat stat--ultra p-3" tabindex="0" aria-label="دورات وشهادات">
+          <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+          <div class="num" data-count="8">0</div>
+          <div class="lbl">دورات وشهادات</div>
+          <span class="stat-glow" aria-hidden="true"></span>
+          <span class="stat-spark" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- Stat -->
+      <div class="col-12 col-md-4">
+        <div class="card stat stat--ultra p-3" tabindex="0" aria-label="مهارات رئيسية">
+          <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="num" data-count="8">0</div>
+          <div class="lbl">مهارات رئيسية</div>
+          <span class="stat-glow" aria-hidden="true"></span>
+          <span class="stat-spark" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+
+  <!-- Qualifications -->
+  <section id="content" class="py-5 quals" aria-labelledby="qualsTitle">
+    <div class="container" data-aos="fade-up">
+      <h2 id="qualsTitle" class="section-title h3 mb-4">
+        <i class="fa-solid fa-user-graduate ms-2" aria-hidden="true"></i>المؤهلات
+        <small>أبرز الشهادات والخبرات الأكاديمية</small>
+      </h2>
+  
+      <div class="row g-4">
+        <!-- بطاقة 1 -->
+        <div class="col-md-6">
+          <article class="qual-card p-4 h-100 reveal tilt" data-delay="1" role="article" tabindex="0" aria-label="بكالوريوس تقنية معلومات">
+            <div class="qual-icon-wrap" aria-hidden="true">
+              <span class="qual-icon-glow"></span>
+              <span class="qual-icon"><i class="fa-solid fa-laptop-code"></i></span>
+              <span class="pulse"></span>
+            </div>
+  
+            <h3 class="qual-title h5 mt-3">بكالوريوس تقنية معلومات</h3>
+            <p class="qual-sub">جامعة العلوم والتكنولوجيا – تقدير <strong>ممتاز</strong>.</p>
+  
+            <div class="qual-meta" aria-label="تفاصيل إضافية">
+              <span class="qual-badge" title="سنوات الدراسة"><i class="fa-regular fa-calendar-days ms-1"></i> 2019–2023</span>
+              <span class="qual-badge" title="مشاريع التخرج"><i class="fa-solid fa-diagram-project ms-1"></i> مشاريع تخرّج</span>
+              <span class="qual-badge" title="تقنيات مفضلة"><i class="fa-solid fa-code ms-1"></i> Flutter • Laravel</span>
+            </div>
+  
+            <span class="grid" aria-hidden="true"></span>
+            <span class="shine" aria-hidden="true"></span>
+            <span class="qual-light" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة 2 -->
+        <div class="col-md-6">
+          <article class="qual-card p-4 h-100 reveal tilt" data-delay="2" role="article" tabindex="0" aria-label="دبلوم لغة إنجليزية">
+            <div class="qual-icon-wrap" aria-hidden="true">
+              <span class="qual-icon-glow"></span>
+              <span class="qual-icon"><i class="fa-solid fa-language"></i></span>
+              <span class="pulse"></span>
+            </div>
+  
+            <h3 class="qual-title h5 mt-3">دبلوم لغة إنجليزية</h3>
+            <p class="qual-sub">Excel ETA – تقدير <strong>ممتاز</strong>.</p>
+  
+            <div class="qual-meta" aria-label="تفاصيل إضافية">
+              <span class="qual-badge"><i class="fa-regular fa-calendar-days ms-1"></i> 2023</span>
+              <span class="qual-badge"><i class="fa-solid fa-comments ms-1"></i> محادثة • كتابة • استماع</span>
+            </div>
+  
+            <span class="grid" aria-hidden="true"></span>
+            <span class="shine" aria-hidden="true"></span>
+            <span class="qual-light" aria-hidden="true"></span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+
+
+
+
+<!-- Certifications -->
+<section id="content3" class="py-5 certs">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-certificate ms-2"></i>الدورات والشهادات
+      </h2>
+  
+      <div class="row g-3">
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-shield-halved"></i></span>
+              <h6 class="cert-title">Intro to Diploma – Red Nexus</h6>
+            </header>
+            <p class="cert-desc">دبلومة (أمن معلومات/Red Teaming) – 120+ ساعة تدريبية.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-flag"></i></span>
+              <h6 class="cert-title">CTF & Hack The Box</h6>
+            </header>
+            <p class="cert-desc">تأهيل عملي على CTF ومختبرات Hack The Box (مستويات أساسية–متوسطة).</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-id-card"></i></span>
+              <h6 class="cert-title">ICDL</h6>
+            </header>
+            <p class="cert-desc">شهادة ICDL الدولية.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-user-graduate"></i></span>
+              <h6 class="cert-title">المهارات الأكاديمية المتميزة</h6>
+            </header>
+            <p class="cert-desc">دورة المهارات الأكاديمية المتميزة.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-comments"></i></span>
+              <h6 class="cert-title">مهارات التواصل</h6>
+            </header>
+            <p class="cert-desc">دورة مهارات التواصل.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-users-gear"></i></span>
+              <h6 class="cert-title">تنمية مهارات القيادة</h6>
+            </header>
+            <p class="cert-desc">دورة تنمية مهارات القيادة.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-brain"></i></span>
+              <h6 class="cert-title">التفكير الناقد</h6>
+            </header>
+            <p class="cert-desc">دورة التفكير الناقد.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-network-wired"></i></span>
+              <h6 class="cert-title">CCNA</h6>
+            </header>
+            <p class="cert-desc">شبكات سيسكو (CCNA).</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-brands fa-linux"></i></span>
+              <h6 class="cert-title">مقدمة في لينكس – Cisco</h6>
+            </header>
+            <p class="cert-desc">مقدمة في لينكس – Cisco.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <!-- بطاقة -->
+        <div class="col-md-6">
+          <article class="cert-card card p-3 h-100">
+            <header class="cert-head">
+              <span class="cert-icon"><i class="fa-solid fa-trophy"></i></span>
+              <h6 class="cert-title">شهادتا تقدير</h6>
+            </header>
+            <p class="cert-desc">Excel ETA &amp; امتياز.</p>
+            <span class="cert-edge" aria-hidden="true"></span>
+            <span class="cert-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Experience Timeline -->
+  <section id="content2" class="py-5 experience">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-briefcase ms-2"></i>الخبرة والمشاريع (خط زمني)
+      </h2>
+  
+      <div class="card p-4">
+        <div class="t-grid">
+          <div class="t-line" aria-hidden="true"></div>
+  
+          <!-- 1 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-shield-halved"></i></span>
+              <h5 class="mb-1">اختبار اختراق الويب وواجهات الـ API</h5>
+            </div>
+            <p class="mb-0 text-white">تطبيق عملي على OWASP Top 10، تحليل الطلبات/الاستجابات، واستغلال ثغرات شائعة وتوثيقها.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 2 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-user-ninja"></i></span>
+              <h5 class="mb-1">Red Teaming &amp; OSINT</h5>
+            </div>
+            <p class="mb-0 text-white">جمع معلومات مفتوحة المصدر، إعداد OPSEC، ومحاكاة خطوات الخصم ضمن سيناريوهات مقيّدة أخلاقيًا.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 3 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+              <h5 class="mb-1">اختبار تطبيقات الموبايل</h5>
+            </div>
+            <p class="mb-0 text-white">فهم سلاسل الثقة، اعتراض الترافيك، وتحليل الـ APK والتخاطب الخلفي بأدوات مناسبة.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 4 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-toolbox"></i></span>
+              <h5 class="mb-1">أدوات واختراقات عملية</h5>
+            </div>
+            <p class="mb-0 text-white">Kali Linux، Nmap، Burp Suite، Metasploit، Wireshark، OWASP ZAP؛ إعداد بيئات اختبار آمنة.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 5 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-bug"></i></span>
+              <h5 class="mb-1">تقارير الثغرات وBug Bounty</h5>
+            </div>
+            <p class="mb-0 text-white">صياغة تقارير احترافية (PoC/Impact/Remediation) وجهوزية للمشاركة في برامج المكافآت.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 6 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-lock"></i></span>
+              <h5 class="mb-1">أساسيات التشفير والبرمجيات الخبيثة</h5>
+            </div>
+            <p class="mb-0 text-white">مفاهيم التعمية، آليات عمل البرمجيات الخبيثة، ومبادئ الوقاية والتحليل المبدئي.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 7 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-gauge-high"></i></span>
+              <h5 class="mb-1">اختبارات الضغط (DoS) – بيئات معملية</h5>
+            </div>
+            <p class="mb-0 text-white">محاكاة هجمات حِمل ضمن مختبرات خاصة مع مراعاة القوانين والأخلاقيات.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 8 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-people-group"></i></span>
+              <h5 class="mb-1">قيادة فرق عمل</h5>
+            </div>
+            <p class="mb-0 text-white">قيادة فرق في مشاريع جامعية والعمل بروح الفريق.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 9 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-fire"></i></span>
+              <h5 class="mb-1">Flutter + Firebase</h5>
+            </div>
+            <p class="mb-0 text-white">تطوير تطبيقات جوال وربطها بقاعدة بيانات سحابية.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 10 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-database"></i></span>
+              <h5 class="mb-1">مشروع التخرج – VIMS</h5>
+            </div>
+            <p class="mb-0 text-white">نظام إدارة السكان بخصائص عدّ وتتبع وتحليل.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 11 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-clipboard-list"></i></span>
+              <h5 class="mb-1">تطبيق عدّ سكاني للأحياء</h5>
+            </div>
+            <p class="mb-0 text-white">حل ميداني لجمع البيانات السكنية.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+          <!-- 12 -->
+          <article class="t-card">
+            <div class="t-head">
+              <span class="t-ico"><i class="fa-solid fa-pen-ruler"></i></span>
+              <h5 class="mb-1">تصميمات عبر Figma</h5>
+            </div>
+            <p class="mb-0 text-white">Depts / تطبيق طبي / موقع شخصي.</p>
+            <span class="t-sheen" aria-hidden="true"></span>
+          </article>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Skills -->
+  <section id="content4" class="py-5 skills">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-microchip ms-2"></i>المهارات التقنية
+      </h2>
+  
+      <div class="row g-4">
+        <!-- أمن المعلومات -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-shield-halved"></i></span>
+                <h6 class="mb-0">أمن المعلومات وRed Teaming</h6>
+              </div>
+              <span class="pct-chip">65%</span>
+            </header>
+            <div class="skill-bar"><span class="fill striped" style="--w:65%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Flutter -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                <h6 class="mb-0">Flutter (تطبيقات جوال)</h6>
+              </div>
+              <span class="pct-chip">90%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:90%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Front-End -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-code"></i></span>
+                <h6 class="mb-0">واجهات ويب (Front-End)</h6>
+              </div>
+              <span class="pct-chip">75%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:75%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Back-End -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-server"></i></span>
+                <h6 class="mb-0">Back-End أساسي</h6>
+              </div>
+              <span class="pct-chip">65%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:65%"></span></div>
+          </article>
+        </div>
+  
+        <!-- DSA -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-diagram-project"></i></span>
+                <h6 class="mb-0">هياكل البيانات والخوارزميات</h6>
+              </div>
+              <span class="pct-chip">80%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Databases -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-database"></i></span>
+                <h6 class="mb-0">قواعد بيانات (MySQL / Firebase)</h6>
+              </div>
+              <span class="pct-chip">85%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:85%"></span></div>
+          </article>
+        </div>
+  
+        <!-- APIs & State -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-solid fa-plug"></i></span>
+                <h6 class="mb-0">APIs وإدارة الحالة (GetX/Provider)</h6>
+              </div>
+              <span class="pct-chip">78%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:78%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Figma -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-brands fa-figma"></i></span>
+                <h6 class="mb-0">تصميم عبر Figma</h6>
+              </div>
+              <span class="pct-chip">70%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:70%"></span></div>
+          </article>
+        </div>
+  
+        <!-- Git -->
+        <div class="col-md-6">
+          <article class="card skill-card p-3 h-100">
+            <header class="skill-head d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-ico"><i class="fa-brands fa-git-alt"></i></span>
+                <h6 class="mb-0">Git &amp; GitHub</h6>
+              </div>
+              <span class="pct-chip">80%</span>
+            </header>
+            <div class="skill-bar"><span class="fill" style="--w:80%"></span></div>
+          </article>
+        </div>
+      </div>
+  
+      <!-- Cloud of badges (كما هي مع لمسة أنعم) -->
+      <div class="skill-cloud mt-3 d-flex flex-wrap gap-2">
+        <span class="badge badge-skill">Dart</span>
+        <span class="badge badge-skill">TypeScript</span>
+        <span class="badge badge-skill">REST</span>
+        <span class="badge badge-skill">JSON</span>
+        <span class="badge badge-skill">OAuth</span>
+        <span class="badge badge-skill">CI/CD</span>
+        <span class="badge badge-skill">Kali Linux</span>
+        <span class="badge badge-skill">Nmap</span>
+        <span class="badge badge-skill">Burp Suite</span>
+        <span class="badge badge-skill">Metasploit</span>
+        <span class="badge badge-skill">Wireshark</span>
+        <span class="badge badge-skill">OWASP ZAP</span>
+        <span class="badge badge-skill">OSINT</span>
+        <span class="badge badge-skill">CTF</span>
+      </div>
+  
+      <!-- يبقى كود السطر البرمجي كما هو -->
+      <div class="card code-slab p-3 mt-3">
+  <pre><code class="code">// Flutter: مثال استدعاء API
+  Future&lt;Response&gt; getUsers() async {
+    final res = await http.get(Uri.parse('https://api.example.com/users'));
+    if(res.statusCode==200){ return res; }
+    throw Exception('خطأ في الاتصال');
+  }</code></pre>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Projects with filter -->
+  <section id="content6" class="py-5 projects">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-diagram-project ms-2"></i>المشاريع
+      </h2>
+  
+      <!-- فلاتر -->
+      <ul class="nav nav-pills gap-2 mb-3">
+        <li class="nav-item"><button class="nav-link filter-pill active" data-filter="all">الكل</button></li>
+        <li class="nav-item"><button class="nav-link filter-pill" data-filter="app">تطبيقات</button></li>
+        <li class="nav-item"><button class="nav-link filter-pill" data-filter="web">ويب</button></li>
+        <li class="nav-item"><button class="nav-link filter-pill" data-filter="design">تصميم</button></li>
+      </ul>
+  
+      <!-- شبكة المشاريع -->
+      <div class="row g-3" id="projects">
+        <!-- كرت -->
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-mobile-screen-button"></i></span>
+              <h6 class="proj-title">Amer Al-Khamisi / تطبيق</h6>
+            </header>
+            <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+            <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/qhovmmNTct7NEpGbm4lpr4/App%2F%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge" aria-hidden="true"></span>
+            <span class="proj-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+  
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-database"></i></span>
+              <h6 class="proj-title">Amer Al-Khamisi / ويب</h6>
+            </header>
+            <p class="proj-sub">نظام متكامل لإدارة بيانات السكان.</p>
+            <div class="proj-tags"><span class="tag">Web</span><span class="tag">Dashboard</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/biEEFYTtSzWXkv2P5U5o8g/%D8%B9%D8%A7%D9%85%D8%B1-%D8%A7%D9%84%D8%AE%D9%85%D9%8A%D8%B3%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge"></span><span class="proj-sheen"></span>
+          </article>
+        </div>
+  
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="design">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-cart-shopping"></i></span>
+              <h6 class="proj-title">Tknohiah</h6>
+            </header>
+            <p class="proj-sub">واجهات متجر إلكتروني بواجهة جذابة.</p>
+            <div class="proj-tags"><span class="tag">Figma</span><span class="tag">UI/UX</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/iFH58KRYopwEo76t4fJD9A/Tknohiah?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge"></span><span class="proj-sheen"></span>
+          </article>
+        </div>
+  
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
+              <h6 class="proj-title">HNTL / تطبيق</h6>
+            </header>
+            <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+            <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/VQlTAhldY0iEXMhZtlYdl4/HNTL%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge"></span><span class="proj-sheen"></span>
+          </article>
+        </div>
+  
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="app">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-mobile"></i></span>
+              <h6 class="proj-title">فلذة كبدي / تطبيق</h6>
+            </header>
+            <p class="proj-sub">تطوير واجهات تطبيق جوال باستخدام Flutter.</p>
+            <div class="proj-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/6SqhsIz3b8vME9NCzYElcB/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2Fapp?type=design&node-id=0-1&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge"></span><span class="proj-sheen"></span>
+          </article>
+        </div>
+  
+        <div class="col-md-6 col-lg-4 project-card show" data-cat="web">
+          <article class="card pro-card h-100 p-3 tilt">
+            <header class="proj-head">
+              <span class="proj-ico"><i class="fa-solid fa-globe"></i></span>
+              <h6 class="proj-title">فلذة كبدي / ويب</h6>
+            </header>
+            <p class="proj-sub">لوحات تحكم ويب للمشروع.</p>
+            <div class="proj-tags"><span class="tag">Web</span><span class="tag">Admin</span></div>
+            <a class="proj-cta stretched-link" href="https://www.figma.com/file/VGnKOqT1iQlLju5qCYEubK/%D9%81%D9%84%D8%B0%D8%A9-%D9%83%D8%A8%D8%AF%D9%8A%2F%D9%88%D9%8A%D8%A8?type=design&node-id=1-450&mode=design" target="_blank" rel="noopener">
+              <span>عرض التصميم</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <span class="proj-edge"></span><span class="proj-sheen"></span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Services -->
+  <!-- Services -->
+<section id="services" class="py-5 services">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-wand-magic-sparkles ms-2"></i>الخدمات
+      </h2>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+          <article class="card svc-card p-3 h-100 tilt">
+            <span class="svc-ico mb-2"><i class="fa-solid fa-shield-halved"></i></span>
+            <h6 class="mb-1">اختبار اختراق مبدئي</h6>
+            <p class="text-white mb-0">فحص أساسي لتطبيقات الويب/API ورفع تقرير ملاحظات وتحسينات.</p>
+            <span class="svc-edge" aria-hidden="true"></span>
+            <span class="svc-sheen" aria-hidden="true"></span>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <article class="card svc-card p-3 h-100 tilt">
+            <span class="svc-ico mb-2"><i class="fa-solid fa-mobile-screen-button"></i></span>
+            <h6 class="mb-1">تطوير تطبيقات Flutter</h6>
+            <p class="text-white mb-0">بناء تطبيقات عالية الأداء لأنظمة Android و iOS.</p>
+            <span class="svc-edge"></span><span class="svc-sheen"></span>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <article class="card svc-card p-3 h-100 tilt">
+            <span class="svc-ico mb-2"><i class="fa-solid fa-window-restore"></i></span>
+            <h6 class="mb-1">واجهات ويب حديثة</h6>
+            <p class="text-white mb-0">تصميم Front-End احترافي سريع الاستجابة.</p>
+            <span class="svc-edge"></span><span class="svc-sheen"></span>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <article class="card svc-card p-3 h-100 tilt">
+            <span class="svc-ico mb-2"><i class="fa-solid fa-database"></i></span>
+            <h6 class="mb-1">قواعد بيانات</h6>
+            <p class="text-white mb-0">تصميم مخططات MySQL ودمج Firebase.</p>
+            <span class="svc-edge"></span><span class="svc-sheen"></span>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <article class="card svc-card p-3 h-100 tilt">
+            <span class="svc-ico mb-2"><i class="fa-solid fa-palette"></i></span>
+            <h6 class="mb-1">تصميم UI/UX</h6>
+            <p class="text-white mb-0">نماذج أولية عالية الدقة عبر Figma.</p>
+            <span class="svc-edge"></span><span class="svc-sheen"></span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-5 testimonials">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-comment-dots ms-2"></i>آراء العملاء
+      </h2>
+  
+      <div id="testiCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5200" data-bs-touch="true">
+        <!-- مؤشرات -->
+        <div class="carousel-indicators custom-indicators">
+          <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="0" class="active" aria-label="1"></button>
+          <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="1" aria-label="2"></button>
+          <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="2" aria-label="3"></button>
+        </div>
+  
+        <div class="carousel-inner">
+  
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <article class="card testi-card p-4">
+              <span class="testi-progress" aria-hidden="true"></span>
+              <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="testi-avatar"><i class="fa-solid fa-user"></i></span>
+                  <div class="testi-meta">
+                    <strong class="testi-name">عميل متجر إلكتروني</strong>
+                    <small class="testi-role">تجارة إلكترونية</small>
+                  </div>
                 </div>
-                <!-- البريد -->
-                <div class="mb-3 input-wrap">
-                  <label class="form-label">البريد الإلكتروني</label>
-                  <i class="fi fa-solid fa-at"></i>
-                  <input type="email" class="form-control" required>
+                <div class="testi-stars" aria-label="5 من 5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <!-- الرسالة -->
-                <div class="mb-3 input-wrap">
-                  <label class="form-label">رسالتك</label>
-                  <i class="fi fa-solid fa-message"></i>
-                  <textarea class="form-control" rows="4" required></textarea>
-                </div>
-    
-                <div class="d-flex gap-2 align-items-center flex-wrap">
-                  <button class="btn btn-brand" type="submit">
-                    <i class="fa-solid fa-paper-plane ms-1"></i>إرسال
-                  </button>
-                  <a class="btn btn-ghost" href="https://wa.me/967777704977" target="_blank" rel="noopener">
-                    <i class="fa-brands fa-whatsapp ms-1"></i>واتساب
-                  </a>
-                  <small class="form-note text-white-50">أردّ عادة خلال 24 ساعة.</small>
-                </div>
-    
-                <span class="contact-edge" aria-hidden="true"></span>
-                <span class="contact-sheen" aria-hidden="true"></span>
-              </form>
+              </div>
+  
+              <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+              <p class="mb-1">“واجهات أنيقة وتسليم في الوقت. تجربة رائعة.”</p>
+              <span class="testi-edge"></span>
+              <span class="testi-sheen" aria-hidden="true"></span>
             </article>
           </div>
-    
-          <!-- Info -->
-          <div class="col-md-6">
-            <article class="card contact-card p-3 h-100">
-              <h6 class="mb-3 fw-bold">معلومات التواصل</h6>
-    
-              <div class="contact-item">
-                <span class="contact-ico"><i class="fa-solid fa-location-dot"></i></span>
-                <div>
-                  <div class="lbl">العنوان</div>
-                  <div class="val text-white">صنعاء – اليمن (الثورة)</div>
+  
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <article class="card testi-card p-4">
+              <span class="testi-progress" aria-hidden="true"></span>
+              <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="testi-avatar"><i class="fa-solid fa-users"></i></span>
+                  <div class="testi-meta">
+                    <strong class="testi-name">فريق مشروع جامعي</strong>
+                    <small class="testi-role">تطبيق Flutter</small>
+                  </div>
+                </div>
+                <div class="testi-stars" aria-label="5 من 5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
               </div>
-    
-              <div class="contact-item">
-                <span class="contact-ico"><i class="fa-solid fa-envelope"></i></span>
-                <div>
-                  <div class="lbl">البريد</div>
-                  <a class="val link" href="mailto:hani20047@gmail.com">hani20047@gmail.com</a>
+  
+              <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+              <p class="mb-1">“تطبيق Flutter سريع ومستقر كما طُلب بالضبط.”</p>
+              <span class="testi-edge"></span>
+              <span class="testi-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+  
+          <!-- Slide 3 -->
+          <div class="carousel-item">
+            <article class="card testi-card p-4">
+              <span class="testi-progress" aria-hidden="true"></span>
+              <div class="testi-top d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="testi-avatar"><i class="fa-solid fa-stethoscope"></i></span>
+                  <div class="testi-meta">
+                    <strong class="testi-name">عميل تطبيق طبي</strong>
+                    <small class="testi-role">واجهات ويب</small>
+                  </div>
+                </div>
+                <div class="testi-stars" aria-label="5 من 5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
               </div>
-    
-              <div class="contact-item">
-                <span class="contact-ico"><i class="fa-solid fa-phone"></i></span>
-                <div>
-                  <div class="lbl">الهاتف</div>
-                  <a class="val link" href="tel:+967777704977">+967 777704977</a>
-                </div>
+  
+              <i class="fa-solid fa-quote-right quote-mark" aria-hidden="true"></i>
+              <p class="mb-1">“احترافية في التعامل ومرونة في التعديلات.”</p>
+              <span class="testi-edge"></span>
+              <span class="testi-sheen" aria-hidden="true"></span>
+            </article>
+          </div>
+  
+        </div>
+  
+        <button class="carousel-control-prev" type="button" data-bs-target="#testiCarousel" data-bs-slide="prev" aria-label="السابق">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testiCarousel" data-bs-slide="next" aria-label="التالي">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  
+<!-- Contact -->
+<section id="contact" class="py-5 contact">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title h3 mb-4">
+        <i class="fa-solid fa-paper-plane ms-2"></i>تواصل معي
+      </h2>
+  
+      <div class="row g-3">
+        <!-- Form -->
+        <div class="col-md-6">
+          <article class="card contact-card p-3 h-100">
+            <form onsubmit="alert('يمكن ربط الإرسال بـ Formspree / Backend لاحقًا');return false;">
+              <!-- الاسم -->
+              <div class="mb-3 input-wrap">
+                <label class="form-label">الاسم</label>
+                <i class="fi fa-solid fa-user"></i>
+                <input type="text" class="form-control" required>
               </div>
-    
-              <div class="mt-3">
-                <div class="lbl mb-2">الشبكات</div>
-                <div class="d-flex social gap-2 flex-wrap">
-                  <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="https://www.facebook.com/zz996" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                  <a href="https://wh.ms/967777704977" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                  <a href="https://www.snapchat.com/add/jabs_m21?share_id=9CNKKf1hR6CZXpJDzEBtJQ&locale=ar_YE" target="_blank" aria-label="Snapchat"><i class="fa-brands fa-snapchat-ghost"></i></a>
-                </div>
+              <!-- البريد -->
+              <div class="mb-3 input-wrap">
+                <label class="form-label">البريد الإلكتروني</label>
+                <i class="fi fa-solid fa-at"></i>
+                <input type="email" class="form-control" required>
               </div>
-    
+              <!-- الرسالة -->
+              <div class="mb-3 input-wrap">
+                <label class="form-label">رسالتك</label>
+                <i class="fi fa-solid fa-message"></i>
+                <textarea class="form-control" rows="4" required></textarea>
+              </div>
+  
+              <div class="d-flex gap-2 align-items-center flex-wrap">
+                <button class="btn btn-brand" type="submit">
+                  <i class="fa-solid fa-paper-plane ms-1"></i>إرسال
+                </button>
+                <a class="btn btn-ghost" href="https://wa.me/967777704977" target="_blank" rel="noopener">
+                  <i class="fa-brands fa-whatsapp ms-1"></i>واتساب
+                </a>
+                <small class="form-note text-white-50">أردّ عادة خلال 24 ساعة.</small>
+              </div>
+  
               <span class="contact-edge" aria-hidden="true"></span>
               <span class="contact-sheen" aria-hidden="true"></span>
-            </article>
-          </div>
+            </form>
+          </article>
+        </div>
+  
+        <!-- Info -->
+        <div class="col-md-6">
+          <article class="card contact-card p-3 h-100">
+            <h6 class="mb-3 fw-bold">معلومات التواصل</h6>
+  
+            <div class="contact-item">
+              <span class="contact-ico"><i class="fa-solid fa-location-dot"></i></span>
+              <div>
+                <div class="lbl">العنوان</div>
+                <div class="val text-white">صنعاء – اليمن (الثورة)</div>
+              </div>
+            </div>
+  
+            <div class="contact-item">
+              <span class="contact-ico"><i class="fa-solid fa-envelope"></i></span>
+              <div>
+                <div class="lbl">البريد</div>
+                <a class="val link" href="mailto:hani20047@gmail.com">hani20047@gmail.com</a>
+              </div>
+            </div>
+  
+            <div class="contact-item">
+              <span class="contact-ico"><i class="fa-solid fa-phone"></i></span>
+              <div>
+                <div class="lbl">الهاتف</div>
+                <a class="val link" href="tel:+967777704977">+967 777704977</a>
+              </div>
+            </div>
+  
+            <div class="mt-3">
+              <div class="lbl mb-2">الشبكات</div>
+              <div class="d-flex social gap-2 flex-wrap">
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/zz996" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://wh.ms/967777704977" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.snapchat.com/add/jabs_m21?share_id=9CNKKf1hR6CZXpJDzEBtJQ&locale=ar_YE" target="_blank" aria-label="Snapchat"><i class="fa-brands fa-snapchat-ghost"></i></a>
+              </div>
+            </div>
+  
+            <span class="contact-edge" aria-hidden="true"></span>
+            <span class="contact-sheen" aria-hidden="true"></span>
+          </article>
         </div>
       </div>
-    </section>
-    
-  <!-- Footer -->
-  <footer class="site-footer py-4 mt-4">
-      <span class="footer-edge" aria-hidden="true"></span>
-    
-      <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
-        <!-- Brand mini -->
-        <div class="d-flex align-items-center gap-2">
-          <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
-          <strong class="brand-text">سيرة <span class="brand-accent">هاني</span></strong>
-        </div>
-    
-        <!-- Copy -->
-        <p class="mb-0 text-white-50 small">© <span id="y"></span> هاني حسن. جميع الحقوق محفوظة.</p>
-    
-        <!-- To top -->
-        <a href="#home" class="btn btn-ghost to-top">
-          <i class="fa-solid fa-arrow-up ms-1"></i> للأعلى
-          <span class="toTop-sheen" aria-hidden="true"></span>
+    </div>
+  </section>
+  
+<!-- Footer -->
+<footer class="site-footer py-4 mt-4">
+    <span class="footer-edge" aria-hidden="true"></span>
+  
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+      <!-- Brand mini -->
+      <div class="d-flex align-items-center gap-2">
+        <span class="brand-badge"><i class="fa-solid fa-file-lines"></i></span>
+        <strong class="brand-text">سيرة <span class="brand-accent">هاني</span></strong>
+      </div>
+  
+      <!-- Copy -->
+      <p class="mb-0 text-white-50 small">© <span id="y"></span> هاني حسن. جميع الحقوق محفوظة.</p>
+  
+      <!-- To top -->
+      <a href="#home" class="btn btn-ghost to-top">
+        <i class="fa-solid fa-arrow-up ms-1"></i> للأعلى
+        <span class="toTop-sheen" aria-hidden="true"></span>
+      </a>
+    </div>
+  </footer>
+  <script src="./assets/js/main.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Drawer الجوال (نفس الروابط) -->
+  <div class="offcanvas offcanvas-start nav-drawer" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavLabel">القائمة</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav flex-grow-1 align-items-lg-center gap-1 nav-rtl" id="mainNavList">
+        <li class="nav-item"><a class="nav-link" href="#home"><i class="fa-solid fa-house ms-1"></i><span>الرئيسية</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#content"><i class="fa-solid fa-user-graduate ms-1"></i><span>المؤهلات</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#content3"><i class="fa-solid fa-certificate ms-1"></i><span>الدورات</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#content2"><i class="fa-solid fa-briefcase ms-1"></i><span>الخبرة</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#content4"><i class="fa-solid fa-microchip ms-1"></i><span>المهارات</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#content6"><i class="fa-solid fa-diagram-project ms-1"></i><span>المشاريع</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#services"><i class="fa-solid fa-wand-magic-sparkles ms-1"></i><span>الخدمات</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimonials"><i class="fa-solid fa-comment-dots ms-1"></i><span>آراء</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa-solid fa-paper-plane ms-1"></i><span>تواصل</span></a></li>
+      </ul>
+      <div class="d-flex gap-2 mt-3">
+        <a class="btn btn-brand w-100" href="#" onclick="alert('أضف رابط CV.pdf هنا');return false;">
+          <i class="fa-solid fa-download ms-1"></i>تحميل السيرة
         </a>
       </div>
-    </footer>
-    <script src="./assets/js/main.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="./assets/js/main.js" defer></script>
+    </div>
+    <div class="drawer-edge"></div>
+  </div>
 
-  </body>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <script>
+  // شريط تقدّم التمرير
+  document.addEventListener('scroll', ()=>{
+    const el = document.getElementById('scrollProgress');
+    const h = document.documentElement;
+    const p = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+    if (el) el.style.transform = `scaleX(${p})`;
+  });
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const toggle = document.querySelector('.nav-toggle');
+    const offcanvasEl = document.getElementById('offcanvasNav');
+
+    // تبديل أيقونة زر القائمة + إغلاق عند النقر على رابط
+    if (toggle && offcanvasEl){
+      offcanvasEl.addEventListener('show.bs.offcanvas', ()=> toggle.classList.add('is-open'));
+      offcanvasEl.addEventListener('hide.bs.offcanvas', ()=> toggle.classList.remove('is-open'));
+      const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+      document.querySelectorAll('#offcanvasNav .nav-link').forEach(a => {
+        a.addEventListener('click', ()=> bsOffcanvas.hide());
+      });
+    }
+
+    // إبراز الروابط أثناء التمرير (إن وُجدت أقسام)
+    const allLinks = [...document.querySelectorAll('.main-links .nav-link, #mainNavList .nav-link')];
+    const sectionLinks = allLinks.filter(a => a.hash && document.querySelector(a.hash));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if (e.isIntersecting){
+          allLinks.forEach(l=> l.classList.remove('active'));
+          const active = allLinks.find(l => l.getAttribute('href') === '#'+e.target.id);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, {rootMargin: '-40% 0px -50% 0px', threshold: 0});
+    sectionLinks.forEach(l => io.observe(document.querySelector(l.hash)));
+  });
+  </script>
+
+<script>
+  /* كتابة متغيرة بسيطة */
+  (function(){
+    const el = document.getElementById('typeTarget');
+    if(!el) return;
+    const list = JSON.parse(el.getAttribute('data-strings') || '[]');
+    let i=0, j=0, dir=1;
+  
+    function tick(){
+      if(!list.length) return;
+      const txt = list[i];
+      el.textContent = txt.slice(0, j);
+  
+      if(dir === 1 && j === txt.length){ dir = -1; return setTimeout(tick, 1200); }
+      if(dir === -1 && j === 0){ dir = 1; i = (i + 1) % list.length; return setTimeout(tick, 260); }
+  
+      j += dir;
+      setTimeout(tick, dir === 1 ? 55 : 35);
+    }
+    tick();
+  })();
+  
+  /* مراقبة ظهور البطاقة (بديل AOS) */
+  (function(){
+    const el = document.querySelector('.hero-card[data-animate]');
+    if(!el || !('IntersectionObserver' in window)) { el?.classList.add('in'); return; }
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ el.classList.add('in'); io.unobserve(el); } });
+    }, { threshold: .1 });
+    io.observe(el);
+  })();
+  </script>
+
+<script>
+  /* عدّاد أرقام عند الظهور */
+  (() => {
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    const nums = document.querySelectorAll('#stats .num[data-count]');
+    if(!nums.length) return;
+  
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.dataset.counted) { io.unobserve(el); return; }
+  
+        el.dataset.counted = "1";
+        const to = parseInt(el.dataset.count, 10) || 0;
+        const from = parseInt((el.textContent || "0").replace(/\D/g, ""), 10) || 0;
+        const dur = 1200;
+        const start = performance.now();
+  
+        function step(now){
+          const t = Math.min(1, (now - start) / dur);
+          const val = Math.round(from + (to - from) * easeOutCubic(t));
+          el.textContent = val;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+  
+    nums.forEach(n => io.observe(n));
+  })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  (() => {
+    // Reveal on view
+    const cards = document.querySelectorAll('#content .reveal');
+    if(cards.length){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.35 });
+      cards.forEach(c => io.observe(c));
+    }
+  
+    // Subtle tilt on pointer
+    const tilts = document.querySelectorAll('#content .tilt');
+    const clamp = (n,min,max)=>Math.max(min,Math.min(n,max));
+    tilts.forEach((el) => {
+      let rX = 0, rY = 0;
+      el.addEventListener('pointermove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;   // [0..1]
+        const y = (e.clientY - rect.top)  / rect.height;  // [0..1]
+        rX = clamp((.5 - y) * 6, -6, 6);
+        rY = clamp((x - .5) * 6, -6, 6);
+        el.style.transform = `translateY(-3px) rotateX(${rX}deg) rotateY(${rY}deg)`;
+      });
+      ['pointerleave','blur'].forEach(evt=>{
+        el.addEventListener(evt, ()=>{ el.style.transform = ''; });
+      });
+    });
+  })();
+  </script>
+
+<script>
+  // تعطيل الميلان على الأجهزة اللمسية
+  if (matchMedia('(pointer: coarse)').matches) {
+    document.querySelectorAll('.tilt').forEach(el => el.classList.remove('tilt'));
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  /* =============== Reveal + Tilt (خفيف ومراعي للأداء) =============== */
+  (() => {
+    // Reveal on view
+    const cards = document.querySelectorAll('#content3 .cert-card');
+    if (cards.length && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.willChange = 'transform';
+            e.target.animate(
+              [{opacity:0, transform:'translateY(10px) scale(.985)'},{opacity:1, transform:'none'}],
+              {duration:500, easing:'cubic-bezier(.2,.6,.2,1)', fill:'forwards'}
+            );
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.35 });
+      cards.forEach(c => io.observe(c));
+    }
+  
+    // Subtle tilt فقط على غير اللمس
+    if (window.matchMedia && !matchMedia('(pointer: coarse)').matches) {
+      const clamp = (n,min,max)=>Math.max(min,Math.min(n,max));
+      document.querySelectorAll('#content3 .cert-card').forEach((el) => {
+        let rx=0, ry=0, raf;
+        const onMove = (e) => {
+          const r = el.getBoundingClientRect();
+          const x = (e.clientX - r.left)/r.width;   // 0..1
+          const y = (e.clientY - r.top)/r.height;   // 0..1
+          rx = clamp((.5 - y)*6, -6, 6);
+          ry = clamp((x - .5)*6, -6, 6);
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(()=>{ el.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`; });
+        };
+        const reset = () => { el.style.transform=''; };
+        el.addEventListener('pointermove', onMove);
+        el.addEventListener('pointerleave', reset);
+        el.addEventListener('blur', reset);
+      });
+    }
+  })();
+  </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    /* =============== Reveal + Tilt (خفيف ومراعي للأداء) =============== */
+    (() => {
+      // ظهور تدريجي عند الدخول في العرض
+      const cards = document.querySelectorAll('#content2 .t-card');
+      if (cards.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.style.willChange = 'transform';
+              e.target.animate(
+                [{opacity:0, transform:'translateY(10px) scale(.985)'},{opacity:1, transform:'none'}],
+                {duration:520, easing:'cubic-bezier(.2,.6,.2,1)', fill:'forwards'}
+              );
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.35 });
+        cards.forEach(c => io.observe(c));
+      }
+    
+      // ميلان لطيف بالماوس فقط (تعطيل على الشاشات اللمسية)
+      if (window.matchMedia && !matchMedia('(pointer: coarse)').matches) {
+        const clamp = (n,min,max)=>Math.max(min,Math.min(n,max));
+        document.querySelectorAll('#content2 .t-card').forEach((el) => {
+          let rx=0, ry=0, raf;
+          const onMove = (e) => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left)/r.width;   // 0..1
+            const y = (e.clientY - r.top)/r.height;   // 0..1
+            rx = clamp((.5 - y)*6, -6, 6);
+            ry = clamp((x - .5)*6, -6, 6);
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(()=>{ el.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`; });
+          };
+          const reset = () => { el.style.transform=''; };
+          el.addEventListener('pointermove', onMove);
+          el.addEventListener('pointerleave', reset);
+          el.addEventListener('blur', reset);
+        });
+      }
+    })();
+    </script>
+    <script>
+      /* =============== Reveal (خفيف) + تعطيل الميلان على اللمس =============== */
+      (() => {
+        // ظهور تدريجي عند الدخول في العرض
+        const cards = document.querySelectorAll('#content2 .t-card');
+        if (cards.length && 'IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                e.target.style.willChange = 'transform';
+                e.target.animate(
+                  [{opacity:0, transform:'translateY(10px) scale(.985)'},
+                   {opacity:1, transform:'none'}],
+                  {duration:520, easing:'cubic-bezier(.2,.6,.2,1)', fill:'forwards'}
+                );
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.35 });
+          cards.forEach(c => io.observe(c));
+        }
+      
+        // ميلان لطيف بالماوس فقط (نعطّله على الأجهزة اللمسية)
+        if (window.matchMedia && !matchMedia('(pointer: coarse)').matches) {
+          const clamp = (n,min,max)=>Math.max(min,Math.min(n,max));
+          document.querySelectorAll('#content2 .t-card').forEach((el) => {
+            let rx=0, ry=0, raf;
+            const onMove = (e) => {
+              const r = el.getBoundingClientRect();
+              const x = (e.clientX - r.left)/r.width;
+              const y = (e.clientY - r.top)/r.height;
+              rx = clamp((.5 - y)*6, -6, 6);
+              ry = clamp((x - .5)*6, -6, 6);
+              cancelAnimationFrame(raf);
+              raf = requestAnimationFrame(()=>{ el.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`; });
+            };
+            const reset = () => { el.style.transform=''; };
+            el.addEventListener('pointermove', onMove);
+            el.addEventListener('pointerleave', reset);
+            el.addEventListener('blur', reset);
+          });
+        }
+      })();
+      </script>
+      <script>
+        /* ====================== Testimonials + Contact helper ====================== */
+        (() => {
+          // ظهور تدريجي للبطاقات
+          const revealTargets = document.querySelectorAll('#testimonials .testi-card, #contact .contact-card');
+          if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries)=>{
+              entries.forEach(e=>{
+                if(e.isIntersecting){
+                  e.target.classList.add('reveal-in');
+                  io.unobserve(e.target);
+                }
+              });
+            }, { threshold: .35 });
+            revealTargets.forEach(t=>io.observe(t));
+          }
+        
+          // تقدّم شريط الكاروسيل حسب المدة (data-bs-interval)
+          const carouselEl = document.getElementById('testiCarousel');
+          if (carouselEl) {
+            const interval = parseInt(carouselEl.getAttribute('data-bs-interval') || '5200', 10);
+            let anim;
+        
+            const runProgress = (activeItem) => {
+              const bar = activeItem.querySelector('.testi-progress');
+              if (!bar) return;
+              bar.getAnimations().forEach(a => a.cancel()); // reset
+              anim = bar.animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}], {
+                duration: interval, easing:'linear', fill:'forwards'
+              });
+            };
+        
+            // عند التهيئة، شغّل الشريط للسلايد النشط
+            const active = carouselEl.querySelector('.carousel-item.active');
+            if (active) runProgress(active);
+        
+            carouselEl.addEventListener('slide.bs.carousel', (e) => {
+              // ألغِ أنيميشن السلايد السابق
+              const prev = e.relatedTarget?.parentElement?.querySelector('.carousel-item.active');
+              if (prev) prev.querySelectorAll('.testi-progress').forEach(b => b.getAnimations().forEach(a=>a.cancel()));
+            });
+        
+            carouselEl.addEventListener('slid.bs.carousel', (e) => {
+              runProgress(e.relatedTarget);
+            });
+          }
+        
+          // سنة التذييل (لو ما تم تعيينها في main.js)
+          const y = document.getElementById('y');
+          if (y && !y.textContent.trim()) { y.textContent = new Date().getFullYear(); }
+        })();
+        </script>
+        
+</body>
 </html>
