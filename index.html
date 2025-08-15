@@ -2544,13 +2544,7 @@ html, body{ overflow-x: hidden; }
   -webkit-text-fill-color: currentColor !important;
 }
 
-
-/* === In-page Navigation Fixes (sticky header offset + smooth anchors) === */
-:root{ --appbar-offset: clamp(56px, 7.5vw, 72px); }
-[id]{ scroll-margin-top: var(--appbar-offset, 72px); } /* anchor targets */
-html{ scroll-behavior: smooth; }
-
-\1
+</style>
  </head>
  <body>
   <!-- App Bar -->
@@ -4883,53 +4877,6 @@ function applyFit(){
 })();
 </script>
 
-
-<script>
-// === Mobile Navigation: close drawer and smooth-scroll to target ===
-(function(){
-  // set header offset based on actual appbar height if available
-  const header = document.querySelector('.appbar');
-  if(header){
-    const px = Math.max(header.offsetHeight || 0, 56);
-    document.documentElement.style.setProperty('--appbar-offset', px + 'px');
-  }
-
-  function smoothTo(hash){
-    if(!hash || hash === '#') return;
-    const id = hash.replace(/^#/, '');
-    const el = document.getElementById(decodeURIComponent(id));
-    if(!el) return;
-
-    const openOC = document.querySelector('.offcanvas.show');
-    if(openOC && window.bootstrap && bootstrap.Offcanvas){
-      const inst = bootstrap.Offcanvas.getOrCreateInstance(openOC);
-      inst.hide();
-      setTimeout(()=>{
-        el.scrollIntoView({behavior:'smooth', block:'start', inline:'nearest'});
-      }, 260);
-    }else{
-      el.scrollIntoView({behavior:'smooth', block:'start', inline:'nearest'});
-    }
-  }
-
-  document.addEventListener('click', function(ev){
-    const a = ev.target.closest('a[href^="#"]');
-    if(!a) return;
-    const href = a.getAttribute('href');
-    if(!href || href === '#') return;
-    ev.preventDefault();
-    smoothTo(href);
-    try{ history.pushState(null, '', href); }catch(_){}
-  }, {passive:false});
-
-  if(location.hash){
-    setTimeout(()=> smoothTo(location.hash), 150);
-  }
-})();
-</script>
-
-\1
+</body>
 </html>
 
-
- 
