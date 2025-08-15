@@ -2522,6 +2522,28 @@ html, body{ overflow-x: hidden; }
       color-mix(in oklab, var(--avt-a), transparent 30%) 80 100%);
 }
 
+
+/* === Hero Title: cross-browser visibility & fallback === */
+.hero-luxe .hero-title{ 
+  /* default visible color (used when gradient text isn't supported) */
+  color: var(--t-1, #eaf2ff);
+  -webkit-text-fill-color: currentColor;
+}
+/* Apply gradient only when supported, with proper text fill for Safari */
+@supports ((-webkit-background-clip: text) or (background-clip: text)){
+  .hero-luxe .hero-title{
+    background: linear-gradient(90deg, var(--t-1, #eaf2ff), color-mix(in oklab, var(--t-1, #eaf2ff), black 14%));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+  }
+}
+/* Force solid color if the browser fails background-clip:text */
+.no-bgclip .hero-luxe .hero-title{
+  background: none !important;
+  color: var(--t-1, #eaf2ff) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
 </style>
  </head>
  <body>
@@ -4832,6 +4854,26 @@ function applyFit(){
 
   show(i, true);
   setInterval(()=>{ i = (i + 1) % list.length; show(i); }, DWELL);
+})();
+</script>
+
+
+<script>
+// Detect background-clip:text support and add .no-bgclip when missing
+(function(){
+  try{
+    var ok = false;
+    if (window.CSS && (CSS.supports('background-clip:text') || CSS.supports('-webkit-background-clip:text'))) {
+      ok = true;
+    } else {
+      var el = document.createElement('span');
+      el.style.backgroundClip = 'text';
+      ok = (el.style.backgroundClip === 'text');
+    }
+    if(!ok){ document.documentElement.classList.add('no-bgclip'); }
+  }catch(_){
+    document.documentElement.classList.add('no-bgclip');
+  }
 })();
 </script>
 
