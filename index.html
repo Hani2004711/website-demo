@@ -2420,6 +2420,108 @@ html, body{ overflow-x: hidden; }
   .type .panel{ transition:none !important; }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* ==== Avatar Stack – أساس مشترك (لا تغيّر HTMLك) ==== */
+.avatar-stack{
+  --avt-size: clamp(120px, 28vw, 180px);
+  --avt-ring: 3px;                 /* سماكة الحلقة */
+  --avt-a: var(--brand, #57d2ff);  /* لون 1 افتراضي */
+  --avt-b: var(--brand-2, #8a7dff);/* لون 2 افتراضي */
+
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--avt-size);
+  block-size: var(--avt-size);
+  border-radius: 50%;
+  isolation: isolate;
+}
+
+/* صورة داخلية (يتوافق مع أي class للصورة) */
+.avatar-stack img{
+  inline-size: calc(100% - var(--avt-ring)*2);
+  block-size: calc(100% - var(--avt-ring)*2);
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+  background: #0b101c;
+}
+
+/* حلقة متدرجة (Conic) */
+.avatar-stack::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  padding: var(--avt-ring);
+  background:
+    conic-gradient(from 210deg, var(--avt-a), var(--avt-b), var(--avt-a));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; /* يحفر فراغ للصورة */
+  animation: avt-rotate 16s linear infinite;
+  opacity:.95;
+}
+
+/* توهج ناعم تحت الصورة */
+.avatar-stack::after{
+  content:"";
+  position:absolute; inset:-16%;
+  border-radius:50%;
+  background: radial-gradient(60% 60% at 50% 40%,
+              color-mix(in oklab, var(--avt-a), transparent 70%) 0%,
+              transparent 60%);
+  filter: blur(14px);
+  z-index: 0;
+  opacity:.75;
+  transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+}
+
+/* تفاعل بسيط */
+.avatar-stack:is(:hover,:focus-visible){
+  transform: translateY(-2px);
+}
+.avatar-stack:is(:hover,:focus-visible)::after{
+  opacity:.95; filter: blur(18px);
+}
+
+@keyframes avt-rotate{ to{ transform: rotate(360deg); } }
+
+/* ==== ثيمات جاهزة (اختر واحدًا بإضافة الكلاس) ==== */
+.avt-brand  { --avt-a: var(--brand, #57d2ff); --avt-b: var(--brand-2, #8a7dff); }
+.avt-ocean  { --avt-a: #2dd4bf; --avt-b: #60a5fa; }      /* فيروز + أزرق */
+.avt-sunset { --avt-a: #ff8a00; --avt-b: #ff3d81; }      /* غروب */
+.avt-royal  { --avt-a: #a78bfa; --avt-b: #22d3ee; }      /* بنفسجي ملكي + سماوي */
+.avt-neon   { --avt-a: #00f0ff; --avt-b: #39ff88; }      /* نيون عصري */
+.avt-rose   { --avt-a: #ff6bb5; --avt-b: #ffd166; }      /* وردي/ذهبي */
+
+/* خيار إضافي: أشعة خفيفة (Beams) — أضِف avt-beams مع أي ثيم */
+.avt-beams::before{
+  background:
+    conic-gradient(from 200deg,
+      color-mix(in oklab, var(--avt-a), transparent 30%) 0 20%,
+      transparent 20 40%,
+      color-mix(in oklab, var(--avt-b), transparent 30%) 40 60%,
+      transparent 60 80%,
+      color-mix(in oklab, var(--avt-a), transparent 30%) 80 100%);
+}
+
 </style>
  </head>
  <body>
@@ -4735,3 +4837,4 @@ function applyFit(){
 
 </body>
 </html>
+
