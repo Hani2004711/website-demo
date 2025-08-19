@@ -4,8 +4,8 @@
 
   /* طبقات النص */
   --t-1:#eaf2ff;      /* نص أساسي */
-  --t-2:#d0dcf5;      /* ثانوي */
-  --t-3:#a0b2d6;      /* خافت */
+  --t-2:#b7c6e6;      /* ثانوي */
+  --t-3:#8498bf;      /* خافت */
   --muted:var(--t-3);
 
   /* ألوان الهوية (منسقة للأيقونات والنصوص) */
@@ -26,7 +26,7 @@
   /* نظام مقاسات */
   --gx: clamp(14px, 2.4vw, 28px);
   --container: min(100% - calc(var(--gx)*2), 1160px);
-  --fs-body: clamp(15px, 3vw, 18px);
+  --fs-body: clamp(14px, 3.4vw, 18px);
   --fs-nav: clamp(13px, 2.8vw, 16px);
   --fs-kicker: clamp(12px, 2.6vw, 14px);
   --fs-hero: clamp(16px, 3.2vw, 18px);
@@ -100,7 +100,7 @@ a{color:inherit; text-decoration:none}
     transition: background .18s ease, color .18s ease, transform .08s ease, box-shadow .18s ease;
     line-height:1;
   }
-  .main-links .nav-link:hover{color:var(--t-1); background:color-mix(in oklab, var(--brand), transparent 80%)}
+  .main-links .nav-link:hover{color:var(--t-1); background:#0f172a66}
   .main-links .nav-link:active{transform:translateY(1px)}
   .main-links .nav-link.active{
     color:#0a0f16; background:var(--icon-grad);
@@ -374,7 +374,7 @@ transition: background .15s ease, transform .08s ease, box-shadow .18s ease;
 
 /* لوحة ألوان للنص */
 .text-ink     { color: var(--ink) !important; }
-/* duplicate removed: .text-muted   { color: var(--muted) !important; } */
+/* duplicated removed: .text-muted   { color: var(--muted) !important; } */
 .text-soft    { color: color-mix(in oklab, var(--ink), transparent 40%) !important; }
 
 .text-brand   { color: var(--brand) !important; }
@@ -2508,3 +2508,59 @@ background: none !important;
 color: var(--t-1, #eaf2ff) !important;
 -webkit-text-fill-color: currentColor !important;
 }
+
+
+
+
+
+
+
+
+
+:root{
+  /* خلفية داكنة غير لامعة */
+  --bg:#0b0f16; --bg-2:#0f1524; --paper:#101725;
+  --t-1:#eaf2ff; --t-2:#d0dcf5; --t-3:#a0b2d6;
+  --brand:#22d3ee; --brand-2:#4f46e5; --accent:#38bdf8;
+  --grad-main:linear-gradient(90deg,var(--brand),var(--brand-2));
+  --grad-accent:linear-gradient(90deg,var(--brand),var(--accent));
+  --icon-grad:linear-gradient(90deg,#9ae6ff,#b9b5ff);
+  --border:#1a2438; --radius:16px; --radius-lg:24px;
+  --shadow:0 14px 36px rgba(0,0,0,.45);
+  --gx:clamp(14px,2.4vw,28px);
+  --container:min(100% - calc(var(--gx)*2),1160px);
+  --fs-body: clamp(15px, 3vw, 18px);
+  --fs-nav:clamp(13px,2.8vw,16px);
+  --fs-hero:clamp(16px,3.2vw,18px);
+  --pad-1:clamp(10px,2.2vw,14px);
+  --pad-2:clamp(14px,3vw,18px);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font:400 var(--fs-body)/1.75 "Cairo",system-ui,sans-serif;color:var(--t-1);
+background:linear-gradient(180deg,var(--bg),var(--bg-2));overflow-x:hidden}
+
+.container{width:var(--container);margin-inline:auto}
+a{text-decoration:none;color:inherit}
+::selection{background:color-mix(in oklab,var(--brand),black 30%);color:#fff}
+
+/* App Bar */
+.appbar{position:sticky;top:0;z-index:30;background:#0b0f16f2;backdrop-filter:blur(8px)}
+.main-links{display:none}
+@media(min-width:992px){.main-links{display:flex;gap:6px;list-style:none}}
+
+/* Hero Luxe */
+.hero-luxe{padding-block:clamp(18px,5vw,46px);color:var(--t-1)}
+.hero-luxe .hero-title{font-size:clamp(26px,6.5vw,42px);
+background:linear-gradient(90deg,var(--t-1),color-mix(in oklab,var(--t-1),black 14%));
+-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Avatar */
+.avatar{inline-size:clamp(140px,28vw,200px);block-size:clamp(140px,28vw,200px);border-radius:50%;overflow:hidden}
+
+/* Stats */
+.stats-section{padding-block:clamp(12px,4vw,24px)}
+.stat{border-radius:18px;background:#101725;padding:1rem;box-shadow:0 14px 36px rgba(0,0,0,.35)}
+.stat .num{font-size:clamp(24px,7.5vw,48px);font-weight:900}
+.stat .lbl{font-size:clamp(12px,3.2vw,14px);color:color-mix(in oklab, var(--t-1), transparent 25%)}
