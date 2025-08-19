@@ -42,7 +42,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
 body{
-  margin:0; font:400 var(--fs-body)/1.8 "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  margin:0; font:400 var(--fs-body)/1.75 "Cairo", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   color:var(--t-1);
   background:
     radial-gradient(900px 520px at 120% -10%, #4f46e528 0%, transparent 60%),
@@ -56,7 +56,7 @@ body{
 }
 .container{width:var(--container); margin-inline:auto}
 img,video{max-width:100%; height:auto; display:block}
-a{color:var(--t-1);text-decoration:none;}
+a{color:inherit; text-decoration:none}
 ::selection{background:color-mix(in oklab,var(--brand),black 30%); color:#fff}
 
 /* =================== App Bar (مُنظَّم) =================== */
@@ -100,7 +100,7 @@ a{color:var(--t-1);text-decoration:none;}
     transition: background .18s ease, color .18s ease, transform .08s ease, box-shadow .18s ease;
     line-height:1;
   }
-  .main-links .nav-link:hover{color:#0b0f16; background:linear-gradient(90deg,var(--brand),var(--brand-2));box-shadow:0 10px 18px rgba(79,70,229,.22)}
+  .main-links .nav-link:hover{color:var(--t-1); background:color-mix(in oklab, var(--brand), transparent 80%)}
   .main-links .nav-link:active{transform:translateY(1px)}
   .main-links .nav-link.active{
     color:#0a0f16; background:var(--icon-grad);
@@ -280,7 +280,7 @@ text-shadow: 0 0 0 #0000; /* يمنع تمويه غير مرغوب */
 }
 
 /* سطر التعريف المتغيّر */
-.hero-luxe .hero-subtitle{color:color-mix(in oklab, var(--t-1), transparent 25%); color:var(--muted); font-size: var(--fs-sub) }
+.hero-luxe .hero-subtitle{ color:var(--muted); font-size: var(--fs-sub) }
 .type{
 position:relative; display:inline-block; min-width: 7ch;
 }
@@ -326,7 +326,7 @@ border:1px solid color-mix(in oklab, var(--ink), transparent 85%);
 background: linear-gradient(90deg, var(--brand), var(--brand2));
 -webkit-background-clip:text; background-clip:text; color:transparent; opacity:.95;
 }
-.chip-glass{color:var(--t-1);
+.chip-glass{
 color:var(--ink);
 background: color-mix(in oklab, var(--paper), transparent 16%);
 backdrop-filter: blur(6px);
@@ -349,7 +349,7 @@ transition: filter .15s ease, transform .08s ease, box-shadow .18s ease;
 .btn-luxe:hover{ filter:brightness(.98); box-shadow: 0 16px 32px color-mix(in oklab, var(--brand), transparent 54%), inset 0 1px 0 #ffffffaa }
 .btn-luxe:active{ transform: translateY(1px) }
 
-.btn-ghost-luxe{color:var(--t-1);
+.btn-ghost-luxe{
 background: color-mix(in oklab, var(--paper), transparent 10%);
 color: var(--ink); border:1px solid color-mix(in oklab, var(--ink), transparent 85%);
 border-radius:12px; padding:.66rem 1rem; font-weight:700;
@@ -413,13 +413,13 @@ background-size: 100% 3px;
 }
 
 /* عناوين بفخامة بسيطة */
-.heading-1{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text;
+.heading-1{
 font-size: clamp(24px, 6.2vw, 40px);
 letter-spacing: .2px;
 margin: 0 0 .5rem;
 line-height: 1.2;
 }
-.heading-2{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text;
+.heading-2{
 font-size: clamp(20px, 4.8vw, 28px);
 letter-spacing: .15px;
 margin: 0 0 .5rem;
@@ -556,8 +556,8 @@ outline-offset: 2px;
 
 /* دعم الشاشات الصغيرة */
 @media (max-width: 480px){
-.heading-1{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text; font-size: clamp(22px, 7.2vw, 34px) }
-.heading-2{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text; font-size: clamp(18px, 5.2vw, 24px) }
+.heading-1{ font-size: clamp(22px, 7.2vw, 34px) }
+.heading-2{ font-size: clamp(18px, 5.2vw, 24px) }
 }
 .chip-date{ color:#fff !important; }
 .chip-date i{ color:#fff !important; background:none !important; }
@@ -871,7 +871,10 @@ font-size: clamp(.9rem, 3.6vw, 1rem);
 }
 
 /* صفّ الميتا (أختياري) */
-.qual-meta{color:var(--t-1);text-decoration:none;}
+.qual-meta{
+display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;
+font-size:.9rem; color:var(--ink-2)
+}
 .qual-badge{
 padding:.32rem .6rem; border-radius:999px; font-weight:700; font-size:.72rem; letter-spacing:.2px;
 border:1px solid color-mix(in oklab, var(--border), white 14%);
@@ -917,7 +920,7 @@ filter:blur(22px); opacity:.5;
 .qual-card .shine{ opacity:.45; animation-duration: 6s }
 
 /* الشارات تتلفّف بسلاسة */
-.qual-meta{color:var(--t-1);text-decoration:none;}
+.qual-meta{ gap:.4rem; row-gap:.45rem }
 .qual-badge{ font-size:.7rem; padding:.28rem .55rem }
 }
 
@@ -1700,7 +1703,11 @@ background: color-mix(in oklab, var(--base), transparent 10%);
 }
 
 /* رابط الإجراء */
-.proj-cta{color:var(--t-1);text-decoration:none;}
+.proj-cta{
+position:relative; display:inline-flex; align-items:center; gap:.45rem;
+margin-top:.55rem; font-weight:800; letter-spacing:.2px;
+color:var(--t-1); text-decoration:none;
+}
 .proj-cta span{ background: linear-gradient(90deg,var(--g1),var(--g2)); -webkit-background-clip:text; background-clip:text; color:transparent }
 .proj-cta i{ font-size:.9em; transform: translateY(1px) }
 .proj-cta::after{
@@ -2031,7 +2038,12 @@ background: linear-gradient(90deg,#9ae6ff,#b9b5ff);
 .contact .val.link:hover{ text-decoration:underline }
 
 /* الشبكات الاجتماعية */
-.social a{color:var(--t-1);text-decoration:none;}
+.social a{
+width:40px; height:40px; display:grid; place-items:center; border-radius:12px;
+background: color-mix(in oklab, var(--base), transparent 12%);
+border:1px solid color-mix(in oklab, var(--bdr), white 12%);
+color:var(--t-1); text-decoration:none; transition: transform .18s ease, border-color .18s ease;
+}
 .social a:hover{ transform: translateY(-2px); border-color: color-mix(in oklab, var(--bdr), white 22%) }
 
 /* زخارف ولمعة */
@@ -2130,7 +2142,12 @@ a:focus-visible { outline: 2px solid color-mix(in oklab, var(--brand), white 30%
 
 /* Placeholders and inputs */
 ::placeholder { color: color-mix(in oklab, var(--t-2), transparent 20%); opacity: .9; }
-input, select, textarea{color:var(--t-1);text-decoration:none;}
+input, select, textarea {
+background: color-mix(in oklab, var(--paper), transparent 10%);
+color: var(--t-1);
+border: 1px solid color-mix(in oklab, var(--border), white 12%);
+border-radius: 12px;
+}
 input:focus, select:focus, textarea:focus {
 outline: 2px solid color-mix(in oklab, var(--brand), white 20%);
 outline-offset: 2px;
@@ -2166,14 +2183,14 @@ min-height:1.2em;
 .actions .btn-brand{ display:none !important; }
 .nav-toggle{ width:42px; height:42px; }
 .kicker{ font-size: var(--fs-kicker); padding:.32rem .6rem; }
-.heading-1{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text; font-size: clamp(20px, 7vw, 28px) !important; }
-.heading-2{color:transparent;background:linear-gradient(90deg, var(--t-1), color-mix(in oklab, var(--t-1), black 14%));-webkit-background-clip:text;background-clip:text; font-size: clamp(18px, 6vw, 22px) !important; }
+.heading-1{ font-size: clamp(20px, 7vw, 28px) !important; }
+.heading-2{ font-size: clamp(18px, 6vw, 22px) !important; }
 .lead{ font-size: clamp(14px, 4vw, 16px) !important; }
 .surface{ padding:14px !important; }
 .stat{ padding:12px !important; }
 .stat .num{ font-size: clamp(22px, 7vw, 34px) !important; }
 .qual-card, .cert-card, .t-card{ padding:12px !important; border-radius:14px !important; }
-.qual-meta{color:var(--t-1);text-decoration:none;}
+.qual-meta{ font-size:.85rem; }
 body{ background-size:auto,auto,22px 22px,22px 22px,auto; } /* شبكة أدق للهاتف */
 }
 
@@ -2283,7 +2300,7 @@ opacity: 0; filter: blur(2px);
 
 /* === Mobile Fit for Rotating Type (phones) === */
 @media (max-width: 480px){
-.hero-luxe .hero-subtitle{color:color-mix(in oklab, var(--t-1), transparent 25%); font-size: clamp(14px, 4.4vw, 16px) !important; }
+.hero-luxe .hero-subtitle{ font-size: clamp(14px, 4.4vw, 16px) !important; }
 .type.swipe{
   min-width: 0 !important;
   max-width: 100% !important;
@@ -2491,18 +2508,3 @@ background: none !important;
 color: var(--t-1, #eaf2ff) !important;
 -webkit-text-fill-color: currentColor !important;
 }
-
-a:hover{color:var(--t-1);text-decoration:none;}
-a:hover::after{transform:scaleX(1);opacity:1;}
-a::after{content:"";position:relative;display:block;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(.0);transform-origin:right;transition:transform .25s ease,opacity .25s ease;opacity:.7;margin-top:2px}
-
-.section-title{color:var(--t-1)}
-.section-title small{color:color-mix(in oklab, var(--t-1), transparent 30%)}
-.section-title::after{content:"";display:block;height:3px;border-radius:2px;width:min(140px,40%);margin-top:.45rem;background:linear-gradient(90deg,var(--brand),var(--brand-2));opacity:.9}
-
-p, li{color:color-mix(in oklab, var(--t-1), transparent 22%) }
-
-.card, .qual-card, .cert-card, .t-card{color:var(--t-1)}
-.card p, .qual-card p, .cert-card p, .t-card p{color:color-mix(in oklab, var(--t-1), transparent 22%)}
-
-:focus-visible{outline:2px solid color-mix(in oklab, var(--brand-2), white 20%);outline-offset:2px;border-radius:10px}
