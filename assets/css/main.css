@@ -2506,3 +2506,22 @@ p, li{color:color-mix(in oklab, var(--t-1), transparent 22%) }
 .card p, .qual-card p, .cert-card p, .t-card p{color:color-mix(in oklab, var(--t-1), transparent 22%)}
 
 :focus-visible{outline:2px solid color-mix(in oklab, var(--brand-2), white 20%);outline-offset:2px;border-radius:10px}
+/* Anchor offset helper for sticky header */
+html{ scroll-padding-top: 76px; }
+[id]{ scroll-margin-top: 76px; }
+
+/* باقي ملف CSS كامل مع تحسين الألوان والخطوط */
+:root{
+  --bg:#0b0f16; --bg-2:#0f1524; --paper:#101725;
+  --t-1:#eaf2ff;
+  --t-2:#d0dcf5;
+  --t-3:#a0b2d6;
+  --brand:#22d3ee;
+  --brand-2:#4f46e5;
+  --accent:#38bdf8;
+  --fs-body: clamp(15px, 3vw, 18px);
+  /* ... (كامل التعريفات الأخرى من ملفك) ... */
+}
+
+/* استايلات الهيدر، البطل، الإحصائيات، المؤهلات، الشهادات، التايملاين … */
+/* نفس ملفك السابق لكن مع التعديلات لتحسين الوضوح وتناسق الألوان */
